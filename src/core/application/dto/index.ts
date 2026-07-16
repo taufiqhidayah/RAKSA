@@ -3,6 +3,7 @@ import { ProfileMode, WearerRole } from "@/core/domain/enums";
 
 export interface PublicEmergencyContactDto {
   label: string;
+  relationship: string;
   telUri: string;
   isPrimary: boolean;
 }
@@ -21,8 +22,9 @@ export interface PublicEmergencyPageDto {
   cognitiveConditionFlag: boolean;
   languageHint?: string;
   contacts: PublicEmergencyContactDto[];
-  alertMessage: string;
+  alertMessage?: string;
   wristbandLabel: string;
+  lastConfirmedAt?: string;
 }
 
 export interface ClaimWristbandInput {
@@ -90,6 +92,7 @@ export interface AdminWristbandRowDto {
   profileMode: ProfileMode;
   wearerRole: string;
   wearerLabel: string;
+  activationCode?: string;
   activationCodeStatus?: string;
   activatedAt?: string;
   createdAt: string;
@@ -106,7 +109,6 @@ export interface AdminWristbandDetailDto extends AdminWristbandRowDto {
   notifyOnScan: boolean;
   nfcUrl: string;
   qrUrl: string;
-  activationCode?: string;
   claimedAt?: string;
 }
 

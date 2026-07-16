@@ -12,8 +12,8 @@ const toneClass: Record<Tone, string> = {
 };
 
 const WRISTBAND_STATUS: Record<string, { label: string; tone: Tone }> = {
-  unclaimed: { label: "Belum diklaim", tone: "info" },
-  claimed: { label: "Diklaim", tone: "warning" },
+  unclaimed: { label: "Belum diklaim", tone: "warning" },
+  claimed: { label: "Diklaim", tone: "success" },
   active: { label: "Aktif", tone: "success" },
   disabled: { label: "Dinonaktifkan", tone: "neutral" },
   revoked: { label: "Dicabut", tone: "error" },

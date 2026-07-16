@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Eye,
+  EyeOff,
   Ban,
   Trash2,
   Copy,
@@ -58,6 +59,8 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
   const [detailId, setDetailId] = useState<string | null>(null);
   const [pendingAction, setPendingAction] = useState<PendingAction>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copiedCodeId, setCopiedCodeId] = useState<string | null>(null);
+  const [visibleCodeIds, setVisibleCodeIds] = useState<Set<string>>(new Set());
   const [newOpen, setNewOpen] = useState(searchParams.get("new") === "1");
   const [isPending, startTransition] = useTransition();
 
@@ -85,6 +88,22 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
     await navigator.clipboard.writeText(row.emergencyId);
     setCopiedId(row.id);
     setTimeout(() => setCopiedId(null), 1500);
+  }
+
+  async function copyAccessCode(row: AdminWristbandRowDto) {
+    if (!row.activationCode) return;
+    await navigator.clipboard.writeText(row.activationCode);
+    setCopiedCodeId(row.id);
+    setTimeout(() => setCopiedCodeId(null), 1500);
+  }
+
+  function toggleAccessCode(rowId: string) {
+    setVisibleCodeIds((current) => {
+      const next = new Set(current);
+      if (next.has(rowId)) next.delete(rowId);
+      else next.add(rowId);
+      return next;
+    });
   }
 
   function confirmAction() {
@@ -178,7 +197,7 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                   <th className="px-5 py-3.5 font-medium">Public ID</th>
                   <th className="px-5 py-3.5 font-medium">Label</th>
                   <th className="px-5 py-3.5 font-medium">Status</th>
-                  <th className="px-5 py-3.5 font-medium">Kode</th>
+                  <th className="px-5 py-3.5 font-medium">Kode Akses</th>
                   <th className="px-5 py-3.5 font-medium">Dibuat</th>
                   <th className="px-5 py-3.5 text-right font-medium">Aksi</th>
                 </tr>
@@ -210,7 +229,55 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                       <StatusBadge status={row.status} />
                     </td>
                     <td className="px-5 py-3.5">
-                      <StatusBadge status={row.activationCodeStatus} kind="activation" />
+                      <div className="flex min-w-32 items-center gap-1">
+                        <div className="flex items-center gap-1">
+                          <span className="min-w-16 font-mono text-xs font-semibold tracking-wider text-slate-700 dark:text-slate-200">
+                            {row.activationCode
+                              ? visibleCodeIds.has(row.id)
+                                ? row.activationCode
+                                : "••••••"
+                              : "—"}
+                          </span>
+                          {row.activationCode && (
+                            <>
+                              <button
+                                type="button"
+                                onClick={() => toggleAccessCode(row.id)}
+                                className="rounded-md p-1 text-slate-400 transition-colors hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-brand-500/10"
+                                aria-label={
+                                  visibleCodeIds.has(row.id)
+                                    ? "Sembunyikan kode akses"
+                                    : "Tampilkan kode akses"
+                                }
+                                title={
+                                  visibleCodeIds.has(row.id)
+                                    ? "Sembunyikan kode"
+                                    : "Tampilkan kode"
+                                }
+                              >
+                                {visibleCodeIds.has(row.id) ? (
+                                  <EyeOff className="h-3.5 w-3.5" />
+                                ) : (
+                                  <Eye className="h-3.5 w-3.5" />
+                                )}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => copyAccessCode(row)}
+                                className="rounded-md p-1 text-slate-400 transition-colors hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-brand-500/10"
+                                aria-label="Salin kode akses"
+                                title="Salin kode akses"
+                              >
+                                {copiedCodeId === row.id ? (
+                                  <Check className="h-3.5 w-3.5 text-brand-600" />
+                                ) : (
+                                  <Copy className="h-3.5 w-3.5" />
+                                )}
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </div>
                     </td>
                     <td className="px-5 py-3.5 text-slate-500 dark:text-slate-400">{formatDate(row.createdAt)}</td>
                     <td className="px-5 py-3.5">

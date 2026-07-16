@@ -3,6 +3,7 @@ import { AdminWristbandListDto, AdminWristbandListQuery, AdminWristbandRowDto } 
 import { WristbandRepository } from "@/core/domain/repositories/wristband-repository";
 import { ActivationCodeRepository } from "@/core/domain/repositories/activation-code-repository";
 import { Wristband } from "@/core/domain/entities/wristband";
+import { ActivationCode } from "@/core/domain/entities/activation-code";
 import { WristbandStatus } from "@/core/domain/enums";
 
 export interface ListAdminWristbandsDependencies {
@@ -35,17 +36,18 @@ export class ListAdminWristbandsUseCase
     const codes = await this.deps.activationCodeRepository.findByWristbandIds(
       items.map((w) => w.id),
     );
-    const codeStatusByWristband = new Map(
-      codes.map((c) => [c.wristbandId, c.status]),
-    );
+    const codeByWristband = new Map(codes.map((code) => [code.wristbandId, code]));
 
     return {
-      items: items.map((w) => this.toRow(w, codeStatusByWristband.get(w.id))),
+      items: items.map((w) => this.toRow(w, codeByWristband.get(w.id))),
       total,
     };
   }
 
-  private toRow(w: Wristband, activationCodeStatus?: string): AdminWristbandRowDto {
+  private toRow(
+    w: Wristband,
+    activationCode?: ActivationCode,
+  ): AdminWristbandRowDto {
     return {
       id: w.id,
       emergencyId: w.emergencyId.value,
@@ -53,7 +55,8 @@ export class ListAdminWristbandsUseCase
       profileMode: w.profileMode,
       wearerRole: w.wearerRole,
       wearerLabel: w.wearerLabel,
-      activationCodeStatus,
+      activationCode: activationCode?.code,
+      activationCodeStatus: activationCode?.status,
       activatedAt: w.activatedAt?.toISOString(),
       createdAt: w.createdAt.toISOString(),
       updatedAt: w.updatedAt.toISOString(),

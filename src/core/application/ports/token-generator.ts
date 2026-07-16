@@ -5,7 +5,7 @@
  * random and non-sequential per the security spec (never guessable).
  */
 export interface TokenGenerator {
-  /** URL-safe secret token for the public emergency page (`/e/[token]`). */
+  /** URL-safe secret token for the public emergency page (`/[token]`). */
   generatePublicToken(): string;
   /** Human-readable, visible Emergency ID in the format GS-XXXX-XXXX. */
   generateEmergencyId(): string;

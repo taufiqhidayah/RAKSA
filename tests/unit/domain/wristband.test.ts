@@ -19,8 +19,8 @@ function createWristband(status: WristbandStatus) {
     wearerRole: WearerRole.SELF,
     wearerLabel: "My band",
     notifyOnScan: false,
-    nfcUrl: "https://example.com/e/token",
-    qrUrl: "https://example.com/e/token",
+    nfcUrl: "https://example.com/token",
+    qrUrl: "https://example.com/GS-TEST-0001",
     createdAt: new Date(),
     updatedAt: new Date(),
   });

@@ -137,7 +137,8 @@ describe("RegisterWristbandUseCase", () => {
 
     expect(output.emergencyId).toBe("GS-AAAA-1111");
     expect(output.activationCode).toBe("ABC123");
-    expect(output.nfcUrl).toBe(`https://gelangsiaga.test/e/${"t".repeat(64)}`);
+    expect(output.nfcUrl).toBe(`https://gelangsiaga.test/${"t".repeat(64)}`);
+    expect(output.qrUrl).toBe("https://gelangsiaga.test/GS-AAAA-1111");
 
     expect(wristbandRepository.saved).toHaveLength(1);
     expect(wristbandRepository.saved[0].status).toBe(WristbandStatus.UNCLAIMED);
@@ -173,8 +174,8 @@ describe("RegisterWristbandUseCase", () => {
         wearerRole: WearerRole.SELF,
         wearerLabel: "existing",
         notifyOnScan: false,
-        nfcUrl: "https://x/e/x",
-        qrUrl: "https://x/e/x",
+        nfcUrl: "https://x/token",
+        qrUrl: "https://x/GS-DUPE-0000",
         now: new Date(),
       }),
     );

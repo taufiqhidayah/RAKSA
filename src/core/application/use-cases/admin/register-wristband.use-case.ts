@@ -83,7 +83,7 @@ export class RegisterWristbandUseCase
 
   private buildPublicUrl(token: string): string {
     const base = this.deps.appBaseUrl.replace(/\/$/, "");
-    return `${base}/e/${token}`;
+    return `${base}/${token}`;
   }
 
   private buildEmergencyIdUrl(emergencyId: string): string {

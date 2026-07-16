@@ -10,7 +10,7 @@ export interface ResolveEmergencyIdDependencies {
 /**
  * Resolves a human-readable Emergency ID (GS-XXXX-XXXX) to its public token,
  * so short QR links like {APP_URL}/{emergencyId} can redirect to the canonical
- * /e/{publicToken} emergency page. No authentication required.
+ * /{publicToken} emergency page. No authentication required.
  */
 export class ResolveEmergencyIdUseCase implements UseCase<string, string> {
   constructor(private readonly deps: ResolveEmergencyIdDependencies) {}
