@@ -3,14 +3,11 @@ import { ProfileMode } from "@/core/domain/enums";
 import {
   BadgeAlert,
   Brain,
-  CalendarDays,
   CheckCircle2,
   ChevronRight,
   Clock3,
-  Droplets,
   FileHeart,
   HeartPulse,
-  Languages,
   MessageCircle,
   Phone,
   Pill,
@@ -74,38 +71,38 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
       </div>
 
       <section
-        className="fixed bottom-[max(.65rem,env(safe-area-inset-bottom))] left-1/2 z-20 grid w-[calc(100%-1rem)] max-w-[504px] -translate-x-1/2 gap-2.5 rounded-[22px] border border-[#ECE8FF]/90 bg-white/85 p-2.5 shadow-[0_22px_50px_-25px_rgba(51,35,116,0.48)] backdrop-blur-xl"
+        className="fixed bottom-[max(.65rem,env(safe-area-inset-bottom))] left-1/2 z-20 grid w-[calc(100%-1rem)] max-w-[504px] -translate-x-1/2 gap-2 rounded-[24px] border border-[#EDE8F8] bg-white/95 p-3 shadow-[0_18px_40px_-22px_rgba(76,61,120,0.35)] backdrop-blur-xl"
         aria-label="Tindakan darurat"
       >
         {primaryContact && (
           <a
             href={primaryContact.telUri}
-            style={{ color: "#ffffff" }}
-            className="flex min-h-14 items-center justify-center gap-2.5 rounded-2xl bg-[#7247B8] px-4 py-3.5 text-center text-[15px] font-bold leading-tight no-underline shadow-[0_14px_28px_-15px_rgba(216,185,211,0.7)] transition duration-200 hover:-translate-y-px hover:bg-[#CFAECC] active:scale-[0.975] motion-reduce:transform-none motion-reduce:transition-none"
+            style={{ color: "#3F2F74" }}
+            className="flex min-h-14 items-center justify-center gap-2.5 rounded-2xl bg-[#A99BE8] px-4 py-3.5 text-center text-[15px] font-bold leading-tight no-underline shadow-[0_10px_22px_-12px_rgba(169,155,232,0.85)] transition duration-200 hover:-translate-y-px hover:bg-[#9B8CDE] active:scale-[0.975] motion-reduce:transform-none motion-reduce:transition-none"
           >
-            <Phone size={22} style={{ color: "#ffffff" }} aria-hidden="true" />
+            <Phone size={22} style={{ color: "#3F2F74" }} aria-hidden="true" />
             Hubungi {primaryContact.label}
           </a>
         )}
-        <div className="grid grid-cols-2 gap-2.5">
+        <div className="grid grid-cols-2 gap-2">
           {primaryContact && (
             <a
               href={toWhatsAppUri(primaryContact.telUri)}
-              style={{ color: "#ffffff" }}
-              className="flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-[#2FB201] px-3 py-3.5 text-center text-[15px] font-bold no-underline shadow-[0_14px_28px_-15px_rgba(181,239,164,0.7)] transition duration-200 hover:bg-[#A8E896] active:scale-[0.975] motion-reduce:transform-none motion-reduce:transition-none max-[350px]:px-2 max-[350px]:text-[13px]"
+              style={{ color: "#14532D" }}
+              className="flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-[#6BCB8F] px-3 py-3.5 text-center text-[15px] font-bold no-underline shadow-[0_10px_22px_-12px_rgba(107,203,143,0.8)] transition duration-200 hover:bg-[#5CBD81] active:scale-[0.975] motion-reduce:transform-none motion-reduce:transition-none max-[350px]:px-2 max-[350px]:text-[13px]"
               target="_blank"
               rel="noreferrer"
             >
-              <MessageCircle size={21} style={{ color: "#ffffff" }} aria-hidden="true" />
+              <MessageCircle size={21} style={{ color: "#14532D" }} aria-hidden="true" />
               WhatsApp
             </a>
           )}
           <a
             href="tel:112"
-            style={{ color: "#ffffff" }}
-            className="flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-[#F192A5] px-3 py-3.5 text-center text-[15px] font-bold no-underline shadow-[0_14px_28px_-15px_rgba(241,146,165,0.7)] transition duration-200 hover:-translate-y-px hover:bg-[#EE849A] active:scale-[0.975] motion-reduce:transform-none motion-reduce:transition-none max-[350px]:px-2 max-[350px]:text-[13px]"
+            style={{ color: "#7F1D2F" }}
+            className="flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-[#E88A9C] px-3 py-3.5 text-center text-[15px] font-bold no-underline shadow-[0_10px_22px_-12px_rgba(232,138,156,0.8)] transition duration-200 hover:-translate-y-px hover:bg-[#DE7B8E] active:scale-[0.975] motion-reduce:transform-none motion-reduce:transition-none max-[350px]:px-2 max-[350px]:text-[13px]"
           >
-            <Siren size={22} style={{ color: "#ffffff" }} aria-hidden="true" />
+            <Siren size={22} style={{ color: "#7F1D2F" }} aria-hidden="true" />
             Telepon 112
           </a>
         </div>
@@ -126,16 +123,20 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
         {(data.approximateAge !== undefined ||
           data.bloodType ||
           data.languageHint) && (
-            <div className="mt-3.5 flex flex-wrap gap-3">
-              {data.approximateAge !== undefined && (
-                <Fact icon={CalendarDays} value={`${data.approximateAge} Tahun`} />
-              )}
-              {data.bloodType && <Fact icon={Droplets} value={data.bloodType} />}
-              {data.languageHint && (
-                <Fact icon={Languages} value={formatLanguage(data.languageHint)} />
-              )}
-            </div>
-          )}
+          <p className="mb-0 mt-3 text-[15px] font-medium leading-relaxed text-[#6B7280]">
+            {[
+              data.approximateAge !== undefined
+                ? `${data.approximateAge} tahun`
+                : null,
+              data.bloodType ? `Golongan darah ${data.bloodType}` : null,
+              data.languageHint
+                ? `Bahasa ${formatLanguage(data.languageHint)}`
+                : null,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
+          </p>
+        )}
       </section>
 
       {contacts.length > 0 && (
@@ -182,34 +183,40 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
         </section>
       )}
 
-      {data.criticalAllergies && (
-        <InfoCard
-          icon={BadgeAlert}
-          title="Alergi penting"
-          body={data.criticalAllergies}
-          tone="danger"
-          display="pills"
-        />
-      )}
-
-      {data.medicalConditions && (
-        <InfoCard
-          icon={HeartPulse}
-          title="Kondisi medis"
-          body={data.medicalConditions}
-          tone="primary"
-          display="pills"
-        />
-      )}
-
-      {data.importantMedications && (
-        <InfoCard
-          icon={Pill}
-          title="Obat penting"
-          body={data.importantMedications}
-          tone="info"
-          display="pills"
-        />
+      {(data.criticalAllergies ||
+        data.medicalConditions ||
+        data.importantMedications) && (
+        <section className={`${cardClass} mt-4 p-5`}>
+          <h2 className="mb-1 mt-0 text-lg font-semibold text-[#171717]">
+            Informasi medis
+          </h2>
+          <div className="divide-y divide-[#ECE8FF]">
+            {data.criticalAllergies && (
+              <MedicalRow
+                icon={BadgeAlert}
+                title="Alergi"
+                body={data.criticalAllergies}
+                tone="danger"
+              />
+            )}
+            {data.medicalConditions && (
+              <MedicalRow
+                icon={HeartPulse}
+                title="Kondisi"
+                body={data.medicalConditions}
+                tone="primary"
+              />
+            )}
+            {data.importantMedications && (
+              <MedicalRow
+                icon={Pill}
+                title="Obat"
+                body={data.importantMedications}
+                tone="info"
+              />
+            )}
+          </div>
+        </section>
       )}
 
       {data.profileMode === ProfileMode.CHILD_GUARDIAN &&
@@ -272,19 +279,46 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
   );
 }
 
-function Fact({
+function MedicalRow({
   icon: Icon,
-  value,
+  title,
+  body,
+  tone,
 }: {
   icon: LucideIcon;
-  value: string;
+  title: string;
+  body: string;
+  tone: keyof typeof medicalTone;
 }) {
+  const colors = medicalTone[tone];
+  const values = splitMedicalValues(body);
+
   return (
-    <div className="inline-flex h-10 min-w-0 items-center gap-2 rounded-full border border-[#ECE8FF] bg-[#F5F2FF] px-3.5 text-[#6D4AFF]">
-      <Icon size={18} aria-hidden="true" />
-      <strong className="text-base font-semibold leading-none text-[#171717] [overflow-wrap:anywhere]">
-        {value}
-      </strong>
+    <div className="flex gap-3 py-3.5 first:pt-3 last:pb-0">
+      <span
+        className={`mt-0.5 grid size-10 shrink-0 place-items-center rounded-xl ${colors.icon}`}
+      >
+        <Icon size={20} aria-hidden="true" />
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="mb-1.5 mt-0 text-sm font-semibold text-[#171717]">{title}</p>
+        {values.length > 1 ? (
+          <div className="flex flex-wrap gap-2">
+            {values.map((value, index) => (
+              <span
+                key={`${value}-${index}`}
+                className={`inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold ${colors.pill}`}
+              >
+                {value}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className="mb-0 text-[15px] font-medium leading-relaxed text-[#4B5563]">
+            {body}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
