@@ -43,7 +43,7 @@ export function LandingStory() {
           </h2>
           <p className="mt-4 text-base leading-relaxed text-slate-600">
             Three situations that can happen to anyone. People nearby usually
-            want to help, but often don't know who to call or how.
+            want to help, but often don&apos;t know who to call or how.
           </p>
         </Reveal>
 

@@ -21,7 +21,7 @@ export function LandingCta() {
               <br className="hidden sm:block" /> before you ever need it.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg">
-              It takes just a few minutes to activate. Or, if you're currently
+              It takes just a few minutes to activate. Or, if you&apos;re currently
               with someone who needs help, jump straight to emergency lookup.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">

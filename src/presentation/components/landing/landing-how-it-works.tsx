@@ -39,7 +39,7 @@ export function LandingHowItWorks() {
           </h2>
           <p className="mt-4 text-base leading-relaxed text-slate-600">
             You only set it up once. After that the band does its job, and
-            anyone who helps doesn't need to learn a thing.
+            anyone who helps doesn&apos;t need to learn a thing.
           </p>
         </Reveal>
 

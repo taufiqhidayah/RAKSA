@@ -57,7 +57,7 @@ export function LandingFeatures() {
             <br /> guard the data.
           </h2>
           <p className="mt-4 max-w-sm text-base leading-relaxed text-slate-600">
-            We hold back from showing data that isn't needed. The emergency
+            We hold back from showing data that isn&apos;t needed. The emergency
             page only surfaces the things that genuinely help a responder.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-canvas px-4 py-2 text-sm font-medium text-slate-600">
