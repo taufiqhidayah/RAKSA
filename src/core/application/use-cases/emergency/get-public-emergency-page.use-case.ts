@@ -60,6 +60,7 @@ export class GetPublicEmergencyPageUseCase
     return {
       profileMode: wristband.profileMode,
       preferredName: profile.preferredName,
+      photoUrl: profile.photoUrl,
       approximateAge: profile.approximateAge,
       bloodType: profile.bloodType,
       criticalAllergies: profile.criticalAllergies,

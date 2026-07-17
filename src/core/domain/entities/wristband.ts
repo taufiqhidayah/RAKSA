@@ -182,6 +182,20 @@ export class Wristband {
     });
   }
 
+  /** Updates just the wearer's display label (used by the setup page). */
+  withWearerLabel(wearerLabel: string, updatedAt: Date): Wristband {
+    const label = wearerLabel.trim();
+    if (!label) {
+      throw new ValidationError("Nama wajib diisi", "wearerLabel");
+    }
+
+    return Wristband.reconstitute({
+      ...this.toProps(),
+      wearerLabel: label,
+      updatedAt,
+    });
+  }
+
   withActivated(activatedAt: Date): Wristband {
     if (this.status !== WristbandStatus.CLAIMED) {
       throw new ValidationError("Wristband must be claimed before activation");
@@ -200,6 +214,36 @@ export class Wristband {
       ...this.toProps(),
       status: WristbandStatus.DISABLED,
       updatedAt,
+    });
+  }
+
+  /**
+   * Owner-facing active/inactive toggle. Activating a claimed or disabled tag
+   * makes its public page reachable; deactivating hides it again. Unclaimed or
+   * revoked tags cannot be activated.
+   */
+  setActive(active: boolean, now: Date): Wristband {
+    if (active) {
+      if (
+        this.status === WristbandStatus.UNCLAIMED ||
+        this.status === WristbandStatus.REVOKED
+      ) {
+        throw new ValidationError("Tag harus diklaim sebelum diaktifkan");
+      }
+      if (this.status === WristbandStatus.ACTIVE) return this;
+      return Wristband.reconstitute({
+        ...this.toProps(),
+        status: WristbandStatus.ACTIVE,
+        activatedAt: this.activatedAt ?? now,
+        updatedAt: now,
+      });
+    }
+
+    if (this.status === WristbandStatus.DISABLED) return this;
+    return Wristband.reconstitute({
+      ...this.toProps(),
+      status: WristbandStatus.DISABLED,
+      updatedAt: now,
     });
   }
 

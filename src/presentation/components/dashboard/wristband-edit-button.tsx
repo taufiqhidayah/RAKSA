@@ -1,18 +1,28 @@
 "use client";
 
 import { useActionState, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
-import { Pencil, X } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Pencil, X } from "lucide-react";
 import { updateFamilyMemberAction, type FamilyActionState } from "@/app/(dashboard)/actions";
 import type { WristbandSummaryDto } from "@/core/application/dto";
+import { WristbandStatus } from "@/core/domain/enums";
 import { FamilyMemberFields } from "./family-member-fields";
+import { WristbandPhotoUploader } from "./wristband-photo-uploader";
+import { TagActiveToggle } from "./tag-active-toggle";
 
 const initialState: FamilyActionState = {};
 
 export function WristbandEditButton({ tag }: { tag: WristbandSummaryDto }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [state, formAction, pending] = useActionState(updateFamilyMemberAction, initialState);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (state.success && open) {
@@ -39,8 +49,10 @@ export function WristbandEditButton({ tag }: { tag: WristbandSummaryDto }) {
         Edit
       </button>
 
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4">
+      {open &&
+        mounted &&
+        createPortal(
+          <div className="dash-scope fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4">
           <div
             className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
             onClick={() => setOpen(false)}
@@ -57,7 +69,9 @@ export function WristbandEditButton({ tag }: { tag: WristbandSummaryDto }) {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">Edit member</h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Change role and display name.</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Change photo, role, and display name.
+                </p>
               </div>
               <button
                 type="button"
@@ -67,6 +81,25 @@ export function WristbandEditButton({ tag }: { tag: WristbandSummaryDto }) {
               >
                 <X className="h-5 w-5" />
               </button>
+            </div>
+
+            <div className="mt-5 space-y-4">
+              <WristbandPhotoUploader
+                wristbandId={tag.id}
+                wearerLabel={tag.wearerLabel}
+                photoUrl={tag.photoUrl}
+              />
+              <TagActiveToggle
+                wristbandId={tag.id}
+                active={tag.status === WristbandStatus.ACTIVE}
+              />
+              <Link
+                href={`/setup?wristband=${tag.id}`}
+                className="flex items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+              >
+                Emergency profile & contacts
+                <ArrowUpRight className="h-4 w-4 text-slate-400 dark:text-slate-500" />
+              </Link>
             </div>
 
             <form action={formAction} className="mt-5 space-y-5">
@@ -105,8 +138,9 @@ export function WristbandEditButton({ tag }: { tag: WristbandSummaryDto }) {
               </div>
             </form>
           </div>
-        </div>
-      )}
+        </div>,
+          document.body,
+        )}
     </>
   );
 }

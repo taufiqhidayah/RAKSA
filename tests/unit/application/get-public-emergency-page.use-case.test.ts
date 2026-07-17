@@ -78,6 +78,9 @@ class FakeProfileRepository implements EmergencyProfileRepository {
   async findByWristbandId() {
     return this.profile;
   }
+  async findByWristbandIds() {
+    return this.profile ? [this.profile] : [];
+  }
   async save() {}
 }
 
