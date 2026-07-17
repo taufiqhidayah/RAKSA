@@ -17,7 +17,7 @@ export class GetAdminWristbandDetailUseCase
   async execute(wristbandId: string): Promise<AdminWristbandDetailDto> {
     const w = await this.deps.wristbandRepository.findById(wristbandId);
     if (!w) {
-      throw new NotFoundError("Tag tidak ditemukan");
+      throw new NotFoundError("Tag not found");
     }
 
     const code = await this.deps.activationCodeRepository.findByWristbandId(w.id);

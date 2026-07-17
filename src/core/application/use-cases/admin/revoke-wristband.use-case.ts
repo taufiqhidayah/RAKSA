@@ -18,7 +18,7 @@ export class RevokeWristbandUseCase implements UseCase<string, void> {
   async execute(wristbandId: string): Promise<void> {
     const wristband = await this.deps.wristbandRepository.findById(wristbandId);
     if (!wristband) {
-      throw new NotFoundError("Tag tidak ditemukan");
+      throw new NotFoundError("Tag not found");
     }
 
     await this.deps.wristbandRepository.save(

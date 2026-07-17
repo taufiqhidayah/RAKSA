@@ -27,30 +27,30 @@ export default async function AdminDashboardPage() {
               Dashboard
             </h1>
             <p className="mt-2 max-w-md text-sm text-slate-500 dark:text-slate-400">
-              Ringkasan tag NFC yang terdaftar di sistem Raksa.
+              Overview of NFC tags registered in the raksa system.
             </p>
           </div>
           <LinkButton href="/admin/cards?new=1" pill className="shrink-0">
             <Plus className="h-4 w-4 text-white" />
-            <span className="text-white">Daftarkan Tag</span>
+            <span className="text-white">Register tag</span>
           </LinkButton>
         </div>
       </section>
 
       {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Total Terdaftar" value={stats.total} icon={CreditCard} tone="brand" hint="Seluruh tag di sistem" index={0} />
+        <StatCard label="Total registered" value={stats.total} icon={CreditCard} tone="brand" hint="All tags in the system" index={0} />
         <StatCard
-          label="Aktif Hari Ini"
+          label="Active today"
           value={stats.activatedToday}
           icon={CheckCircle2}
           tone="emerald"
-          hint="Tag diaktifkan hari ini"
-          trend={{ label: "hari ini", direction: "up" }}
+          hint="Tags activated today"
+          trend={{ label: "today", direction: "up" }}
           index={1}
         />
-        <StatCard label="Menunggu Aktivasi" value={stats.pending} icon={Clock3} tone="amber" hint="Belum diklaim / diklaim" index={2} />
-        <StatCard label="Nonaktif / Dicabut" value={stats.inactive} icon={Ban} tone="slate" hint="Tidak lagi aktif" index={3} />
+        <StatCard label="Pending activation" value={stats.pending} icon={Clock3} tone="amber" hint="Unclaimed / claimed" index={2} />
+        <StatCard label="Disabled / Revoked" value={stats.inactive} icon={Ban} tone="slate" hint="No longer active" index={3} />
       </div>
 
       {/* Recent */}

@@ -13,8 +13,8 @@ interface ActivationFlowProps {
 
 function ActivationSteps({ currentStep }: { currentStep: 1 | 2 }) {
   const steps = [
-    { number: 1, label: "Kode Aktivasi" },
-    { number: 2, label: "Buat Akun" },
+    { number: 1, label: "Activation Code" },
+    { number: 2, label: "Create account" },
   ] as const;
 
   return (
@@ -60,14 +60,14 @@ export function ActivationFlow({ redirectTo, initialMode = "login" }: Activation
           className={`auth-form__tab${mode === "login" ? " auth-form__tab--active" : ""}`}
           onClick={switchToLogin}
         >
-          Masuk
+          Sign in
         </button>
         <button
           type="button"
           className={`auth-form__tab${mode === "register" ? " auth-form__tab--active" : ""}`}
           onClick={switchToRegister}
         >
-          Daftar
+          Sign up
         </button>
       </div>
 
@@ -75,9 +75,9 @@ export function ActivationFlow({ redirectTo, initialMode = "login" }: Activation
         <>
           <LoginForm redirectTo={redirectTo} />
           <p className="auth-form__hint">
-            Belum punya akun?{" "}
+            Don&apos;t have an account?{" "}
             <button type="button" className="auth-link-btn" onClick={switchToRegister}>
-              Daftar dengan kode aktivasi
+              Sign up with activation code
             </button>
           </p>
         </>
@@ -92,14 +92,14 @@ export function ActivationFlow({ redirectTo, initialMode = "login" }: Activation
           ) : (
             <>
               <div className="auth-verified-code">
-                <span className="auth-verified-code__label">Kode aktivasi terverifikasi</span>
+                <span className="auth-verified-code__label">Activation code verified</span>
                 <code className="auth-verified-code__value">{verifiedCode}</code>
                 <button
                   type="button"
                   className="auth-link-btn"
                   onClick={() => setVerifiedCode(null)}
                 >
-                  Ganti kode
+                  Change code
                 </button>
               </div>
 
@@ -108,16 +108,16 @@ export function ActivationFlow({ redirectTo, initialMode = "login" }: Activation
           )}
 
           <p className="auth-form__hint">
-            Sudah punya akun?{" "}
+            Already have an account?{" "}
             <button type="button" className="auth-link-btn" onClick={switchToLogin}>
-              Masuk di sini
+              Sign in here
             </button>
           </p>
 
           <p className="auth-form__footer">
-            Ingin menambah tag ke akun yang sudah ada?{" "}
+            Want to add a tag to an existing account?{" "}
             <Link href="/claim" className="auth-link">
-              Klaim tag baru
+              Claim a new tag
             </Link>
           </p>
         </>

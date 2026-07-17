@@ -18,7 +18,7 @@ export function RegisterForm({ activationCode }: RegisterFormProps) {
 
       <div className="auth-field">
         <label htmlFor="fullName" className="auth-field__label">
-          Nama Lengkap
+          Full name
         </label>
         <input
           id="fullName"
@@ -26,7 +26,7 @@ export function RegisterForm({ activationCode }: RegisterFormProps) {
           type="text"
           autoComplete="name"
           className="auth-field__input"
-          placeholder="Nama Anda"
+          placeholder="Your name"
           required
         />
       </div>
@@ -41,14 +41,14 @@ export function RegisterForm({ activationCode }: RegisterFormProps) {
           type="email"
           autoComplete="email"
           className="auth-field__input"
-          placeholder="nama@email.com"
+          placeholder="name@email.com"
           required
         />
       </div>
 
       <div className="auth-field">
         <label htmlFor="registerPassword" className="auth-field__label">
-          Kata Sandi
+          Password
         </label>
         <input
           id="registerPassword"
@@ -56,7 +56,7 @@ export function RegisterForm({ activationCode }: RegisterFormProps) {
           type="password"
           autoComplete="new-password"
           className="auth-field__input"
-          placeholder="Minimal 6 karakter"
+          placeholder="At least 6 characters"
           required
           minLength={6}
         />
@@ -69,7 +69,7 @@ export function RegisterForm({ activationCode }: RegisterFormProps) {
       )}
 
       <button type="submit" className="auth-btn auth-btn--primary auth-btn--full" disabled={pending}>
-        {pending ? "Memproses..." : "Buat Akun & Klaim Tag"}
+        {pending ? "Processing..." : "Create account & claim tag"}
       </button>
     </form>
   );

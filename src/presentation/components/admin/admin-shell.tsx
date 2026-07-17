@@ -154,7 +154,7 @@ export function AdminShell({
                 type="button"
                 onClick={() => setMobileOpen(true)}
                 className="rounded-xl p-2 text-slate-500 transition-colors hover:bg-slate-100 lg:hidden dark:hover:bg-slate-800"
-                aria-label="Buka menu"
+                aria-label="Open menu"
               >
                 <Menu className="h-5 w-5" />
               </button>
@@ -165,7 +165,7 @@ export function AdminShell({
                   ref={searchRef}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Cari Emergency ID atau label..."
+                  placeholder="Search Emergency ID or label..."
                   className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50/80 pl-10 pr-16 text-sm text-slate-900 transition-all placeholder:text-slate-400 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-500/15 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
                 />
                 <kbd className="pointer-events-none absolute right-2.5 top-1/2 hidden -translate-y-1/2 items-center gap-0.5 rounded-md border border-slate-200 bg-white px-1.5 py-0.5 font-mono text-[10px] font-medium text-slate-400 sm:flex dark:border-slate-700 dark:bg-slate-900">
@@ -178,14 +178,14 @@ export function AdminShell({
                   type="button"
                   onClick={() => setDark((d) => !d)}
                   className="rounded-xl p-2 text-slate-500 transition-all hover:-translate-y-0.5 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
-                  aria-label="Ganti tema"
+                  aria-label="Toggle theme"
                 >
                   {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                 </button>
                 <button
                   type="button"
                   className="relative rounded-xl p-2 text-slate-500 transition-all hover:-translate-y-0.5 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
-                  aria-label="Notifikasi"
+                  aria-label="Notifications"
                 >
                   <Bell className="h-5 w-5" />
                   <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white dark:ring-slate-900" />
@@ -272,7 +272,7 @@ export function AdminShell({
             type="button"
             onClick={() => setMobileOpen(false)}
             className="fixed right-4 top-4 z-50 rounded-xl bg-white p-2 shadow-md lg:hidden dark:bg-slate-800"
-            aria-label="Tutup menu"
+            aria-label="Close menu"
           >
             <X className="h-5 w-5" />
           </button>
@@ -280,10 +280,10 @@ export function AdminShell({
 
         <ConfirmDialog
           open={confirmLogout}
-          title="Keluar dari akun?"
-          description="Anda akan keluar dari sesi superadmin dan diarahkan ke halaman login."
+          title="Sign out?"
+          description="You will be signed out of the superadmin session and redirected to the login page."
           confirmLabel="Logout"
-          cancelLabel="Batal"
+          cancelLabel="Cancel"
           tone="danger"
           loading={signingOut}
           onConfirm={handleSignOut}

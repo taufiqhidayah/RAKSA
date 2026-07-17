@@ -12,17 +12,17 @@ const toneClass: Record<Tone, string> = {
 };
 
 const WRISTBAND_STATUS: Record<string, { label: string; tone: Tone }> = {
-  unclaimed: { label: "Belum diklaim", tone: "warning" },
-  claimed: { label: "Diklaim", tone: "success" },
-  active: { label: "Aktif", tone: "success" },
-  disabled: { label: "Dinonaktifkan", tone: "neutral" },
-  revoked: { label: "Dicabut", tone: "error" },
+  unclaimed: { label: "Unclaimed", tone: "warning" },
+  claimed: { label: "Claimed", tone: "success" },
+  active: { label: "Active", tone: "success" },
+  disabled: { label: "Disabled", tone: "neutral" },
+  revoked: { label: "Revoked", tone: "error" },
 };
 
 const CODE_STATUS: Record<string, { label: string; tone: Tone }> = {
-  unused: { label: "Belum dipakai", tone: "info" },
-  used: { label: "Terpakai", tone: "success" },
-  revoked: { label: "Dicabut", tone: "error" },
+  unused: { label: "Unused", tone: "info" },
+  used: { label: "Used", tone: "success" },
+  revoked: { label: "Revoked", tone: "error" },
 };
 
 interface StatusBadgeProps {

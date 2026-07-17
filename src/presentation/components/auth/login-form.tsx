@@ -27,14 +27,14 @@ export function LoginForm({ redirectTo }: LoginFormProps) {
           type="email"
           autoComplete="email"
           className="auth-field__input"
-          placeholder="nama@email.com"
+          placeholder="name@email.com"
           required
         />
       </div>
 
       <div className="auth-field">
         <label htmlFor="loginPassword" className="auth-field__label">
-          Kata Sandi
+          Password
         </label>
         <input
           id="loginPassword"
@@ -42,7 +42,7 @@ export function LoginForm({ redirectTo }: LoginFormProps) {
           type="password"
           autoComplete="current-password"
           className="auth-field__input"
-          placeholder="Kata sandi Anda"
+          placeholder="Your password"
           required
         />
       </div>
@@ -54,13 +54,13 @@ export function LoginForm({ redirectTo }: LoginFormProps) {
       )}
 
       <button type="submit" className="auth-btn auth-btn--primary auth-btn--full" disabled={pending}>
-        {pending ? "Memproses..." : "Masuk"}
+        {pending ? "Processing..." : "Sign in"}
       </button>
 
       <p className="auth-form__footer">
-        Butuh bantuan darurat?{" "}
+        Need emergency help?{" "}
         <Link href="/lookup" className="auth-link">
-          Pencarian Emergency ID
+          Emergency ID lookup
         </Link>
       </p>
     </form>

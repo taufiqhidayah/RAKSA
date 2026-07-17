@@ -1,4 +1,4 @@
-# Architecture — GelangSiaga (RAKSA-TAG)
+# Architecture — raksa
 
 This project follows **Clean Architecture** (Robert C. Martin) and **SOLID** principles on a **Next.js 15 + Supabase** stack.
 

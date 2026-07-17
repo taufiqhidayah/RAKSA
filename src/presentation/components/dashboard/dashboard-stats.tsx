@@ -135,31 +135,31 @@ export function DashboardStats({ wristbands, scanTrend }: DashboardStatsProps) {
   return (
     <div className="dash-stagger grid grid-cols-2 gap-4 lg:grid-cols-4">
       <StatCard
-        label="Total Tag"
+        label="Total tags"
         value={total}
         icon={Users}
         tone="brand"
         index={0}
-        hint={total > 0 ? `${active} aktif · ${pending} perlu setup` : "Belum ada tag"}
+        hint={total > 0 ? `${active} active · ${pending} need setup` : "No tags yet"}
       />
       <StatCard
-        label="Aktif"
+        label="Active"
         value={active}
         icon={ShieldCheck}
         tone="emerald"
         index={1}
-        hint={total > 0 ? `${Math.round((active / total) * 100)}% dari total` : "—"}
+        hint={total > 0 ? `${Math.round((active / total) * 100)}% of total` : "—"}
       />
       <StatCard
-        label="Perlu Setup"
+        label="Needs setup"
         value={pending}
         icon={Clock}
         tone="amber"
         index={2}
-        hint={pending > 0 ? "Selesaikan profil darurat" : "Semua siap"}
+        hint={pending > 0 ? "Complete emergency profile" : "All set"}
       />
       <StatCard
-        label="Pemindaian 14 hari"
+        label="Scans (14 days)"
         value={totalScans}
         icon={ScanLine}
         tone="blue"

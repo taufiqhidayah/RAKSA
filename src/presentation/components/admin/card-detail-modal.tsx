@@ -12,7 +12,7 @@ import type { AdminWristbandDetailDto } from "@/core/application/dto";
 
 function formatDate(iso?: string): string {
   if (!iso) return "—";
-  return new Date(iso).toLocaleString("id-ID", {
+  return new Date(iso).toLocaleString("en-US", {
     dateStyle: "medium",
     timeStyle: "short",
   });
@@ -88,9 +88,9 @@ export function CardDetailModal({ wristbandId, onClose }: CardDetailModalProps) 
 
   const timeline = detail
     ? [
-        { label: "Dibuat", at: detail.createdAt },
-        { label: "Diklaim", at: detail.claimedAt },
-        { label: "Diaktifkan", at: detail.activatedAt },
+        { label: "Created", at: detail.createdAt },
+        { label: "Claimed", at: detail.claimedAt },
+        { label: "Activated", at: detail.activatedAt },
       ]
     : [];
 
@@ -98,7 +98,7 @@ export function CardDetailModal({ wristbandId, onClose }: CardDetailModalProps) 
     <Modal
       open={Boolean(wristbandId)}
       onClose={onClose}
-      title="Detail Tag"
+      title="Tag details"
       description={detail ? detail.wearerLabel : undefined}
     >
       {loading && (
@@ -142,7 +142,7 @@ export function CardDetailModal({ wristbandId, onClose }: CardDetailModalProps) 
             <InfoRow label="URL NFC/QR">
               <CopyValue value={detail.nfcUrl} />
             </InfoRow>
-            <InfoRow label="Kode Aktivasi">
+            <InfoRow label="Activation Code">
               <span className="inline-flex items-center gap-2">
                 <span className="font-mono text-xs">
                   {detail.activationCode
@@ -156,20 +156,20 @@ export function CardDetailModal({ wristbandId, onClose }: CardDetailModalProps) 
                     type="button"
                     onClick={() => setShowCode((s) => !s)}
                     className="rounded p-1 text-slate-400 hover:text-brand-600"
-                    aria-label={showCode ? "Sembunyikan kode" : "Tampilkan kode"}
+                    aria-label={showCode ? "Hide code" : "Show code"}
                   >
                     {showCode ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                   </button>
                 )}
               </span>
             </InfoRow>
-            <InfoRow label="Mode profil">{detail.profileMode}</InfoRow>
-            <InfoRow label="Peran pemakai">{detail.wearerRole}</InfoRow>
+            <InfoRow label="Profile mode">{detail.profileMode}</InfoRow>
+            <InfoRow label="Wearer role">{detail.wearerRole}</InfoRow>
           </div>
 
           <div>
             <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">
-              <Clock className="h-3.5 w-3.5" /> Aktivitas
+              <Clock className="h-3.5 w-3.5" /> Activity
             </p>
             <div className="space-y-2">
               {timeline.map((t) => (

@@ -169,7 +169,7 @@ export class Wristband {
   }): Wristband {
     const label = params.wearerLabel.trim();
     if (!label) {
-      throw new ValidationError("Nama anggota wajib diisi", "wearerLabel");
+      throw new ValidationError("Member name is required", "wearerLabel");
     }
 
     return Wristband.reconstitute({

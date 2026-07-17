@@ -26,7 +26,7 @@ function CopyRow({ label, value, mono = true }: { label: string; value: string; 
           type="button"
           onClick={copy}
           className="shrink-0 rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-white hover:text-brand-600 dark:hover:bg-slate-700"
-          aria-label={`Salin ${label}`}
+          aria-label={`Copy ${label}`}
         >
           {copied ? <Check className="h-4 w-4 text-brand-600" /> : <Copy className="h-4 w-4" />}
         </button>
@@ -70,9 +70,9 @@ export function RevealCodeContent({ result }: { result: RegisterWristbandOutput 
 
       <div className="flex items-center gap-2 rounded-xl bg-brand-50 p-3 text-sm text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">
         <KeyRound className="h-4 w-4 shrink-0" />
-        <span>Kode Aktivasi hanya untuk paket/manual — jangan dicetak pada gelang.</span>
+        <span>Activation Code is for packaging/manual only — do not print it on the band.</span>
       </div>
-      <CopyRow label="Kode Aktivasi" value={result.activationCode} />
+      <CopyRow label="Activation Code" value={result.activationCode} />
       <CopyRow label="Emergency ID (Public ID)" value={result.emergencyId} />
       <CopyRow label="Public Token" value={result.publicToken} />
       <CopyRow label="URL QR" value={result.qrUrl} />

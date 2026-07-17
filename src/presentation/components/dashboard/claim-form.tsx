@@ -17,7 +17,7 @@ export function ClaimForm() {
           htmlFor="activationCode"
           className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-200"
         >
-          Kode Aktivasi
+          Activation code
         </label>
         <input
           id="activationCode"
@@ -31,7 +31,7 @@ export function ClaimForm() {
           required
           className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50/60 text-center font-mono text-2xl font-semibold uppercase tracking-[0.35em] text-slate-900 transition-all placeholder:tracking-[0.35em] placeholder:text-slate-300 focus:border-brand-500 focus:bg-white focus:outline-none focus:ring-4 focus:ring-brand-500/15 dark:border-slate-700 dark:bg-slate-800/60 dark:text-slate-100 dark:placeholder:text-slate-600 dark:focus:bg-slate-800"
         />
-        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">Kode ada di dalam paket tag.</p>
+        <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">The code is inside the tag package.</p>
       </div>
 
       <div className="border-t border-slate-100 pt-5 dark:border-slate-800">
@@ -53,10 +53,10 @@ export function ClaimForm() {
         className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_-10px_rgba(124,58,237,0.75)] transition-all hover:-translate-y-0.5 hover:bg-brand-500 disabled:pointer-events-none disabled:opacity-60"
       >
         {pending ? (
-          "Menyimpan…"
+          "Saving…"
         ) : (
           <>
-            Tambah Anggota
+            Add member
             <ArrowRight className="h-4 w-4" />
           </>
         )}

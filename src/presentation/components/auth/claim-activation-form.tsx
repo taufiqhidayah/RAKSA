@@ -12,22 +12,22 @@ export function ClaimActivationForm() {
     <form action={formAction} className="auth-form__body">
       <div className="auth-field">
         <label htmlFor="activationCode" className="auth-field__label">
-          Kode Aktivasi
+          Activation Code
         </label>
         <input
           id="activationCode"
           name="activationCode"
           type="text"
           className="auth-field__input auth-field__input--code"
-          placeholder="Contoh: A1B2C3"
+          placeholder="Example: A1B2C3"
           autoComplete="off"
           autoCapitalize="characters"
           spellCheck={false}
           required
         />
         <p className="auth-field__hint">
-          Temukan Kode Aktivasi di dalam paket atau buku manual tag Anda. Kode ini bersifat
-          pribadi dan tidak tercetak di tag.
+          Find the activation code inside your tag pack or manual. This code is private and is
+          not printed on the tag.
         </p>
       </div>
 
@@ -38,7 +38,7 @@ export function ClaimActivationForm() {
       )}
 
       <button type="submit" className="auth-btn auth-btn--primary auth-btn--full" disabled={pending}>
-        {pending ? "Memvalidasi..." : "Klaim Tag"}
+        {pending ? "Validating..." : "Claim tag"}
       </button>
     </form>
   );

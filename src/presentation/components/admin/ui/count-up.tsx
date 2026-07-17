@@ -35,5 +35,5 @@ export function CountUp({ value, durationMs = 900 }: CountUpProps) {
     };
   }, [value, durationMs]);
 
-  return <>{display.toLocaleString("id-ID")}</>;
+  return <>{display.toLocaleString("en-US")}</>;
 }

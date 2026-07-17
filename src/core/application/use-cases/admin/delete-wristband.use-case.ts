@@ -14,12 +14,12 @@ export class DeleteWristbandUseCase implements UseCase<string, void> {
   async execute(wristbandId: string): Promise<void> {
     const wristband = await this.deps.wristbandRepository.findById(wristbandId);
     if (!wristband) {
-      throw new NotFoundError("Tag tidak ditemukan");
+      throw new NotFoundError("Tag not found");
     }
 
     if (!wristband.canBeHardDeleted()) {
       throw new ValidationError(
-        "Hanya tag yang belum diklaim (unclaimed) yang bisa dihapus permanen. Gunakan Revoke.",
+        "Only unclaimed tags can be permanently deleted. Use Revoke instead.",
       );
     }
 

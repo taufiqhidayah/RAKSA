@@ -28,11 +28,11 @@ export function NewTagModal({ onClose }: NewTagModalProps) {
     if (state.result) {
       toast({
         tone: "success",
-        title: "Tag didaftarkan",
-        description: `Emergency ID ${state.result.emergencyId} siap.`,
+        title: "Tag registered",
+        description: `Emergency ID ${state.result.emergencyId} is ready.`,
       });
     } else if (state.error) {
-      toast({ tone: "error", title: "Gagal mendaftarkan", description: state.error });
+      toast({ tone: "error", title: "Registration failed", description: state.error });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
@@ -44,13 +44,13 @@ export function NewTagModal({ onClose }: NewTagModalProps) {
       open
       blur={false}
       onClose={onClose}
-      title={result ? "Tag berhasil didaftarkan" : "Daftarkan Tag NFC Baru"}
+      title={result ? "Tag registered successfully" : "Register new NFC tag"}
       description={
         result
-          ? "Simpan Kode Aktivasi ini sekarang — cetak di paket/manual tag."
-          : "Klik tombol dibawah untuk membuat tag baru."
+          ? "Save this Activation Code now — print it on the packaging/tag manual."
+          : "Click the button below to create a new tag."
       }
-      footer={result ? <Button onClick={onClose}>Selesai</Button> : undefined}
+      footer={result ? <Button onClick={onClose}>Done</Button> : undefined}
     >
       {result ? (
         <RevealCodeContent result={result} />
@@ -61,7 +61,7 @@ export function NewTagModal({ onClose }: NewTagModalProps) {
               htmlFor="deviceType"
               className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-200"
             >
-              Jenis Tag
+              Tag type
             </label>
             <select
               id="deviceType"
@@ -69,14 +69,14 @@ export function NewTagModal({ onClose }: NewTagModalProps) {
               defaultValue="bracelet"
               className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-900 transition-all focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-500/15 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
             >
-              <option value="bracelet">Gelang</option>
-              <option value="necklace">Kalung</option>
-              <option value="keychain">Gantungan Kunci</option>
+              <option value="bracelet">Band</option>
+              <option value="necklace">Necklace</option>
+              <option value="keychain">Keychain</option>
             </select>
           </div>
           <Button type="submit" size="md" disabled={pending} className="w-full">
             <Sparkles className="h-4 w-4" />
-            {pending ? "Memproses..." : "Continue"}
+            {pending ? "Processing..." : "Continue"}
           </Button>
         </form>
       )}

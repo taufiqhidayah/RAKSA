@@ -56,9 +56,9 @@ export function SidebarAdminCard() {
       <div className="flex justify-center">
         <AdminCardArt />
       </div>
-      <p className="mt-3 text-lg font-bold text-white">Mode Superadmin</p>
+      <p className="mt-3 text-lg font-bold text-white">Superadmin mode</p>
       <p className="mt-1 text-sm leading-relaxed text-[#B79CFF]/80">
-        Akses penuh provisi &amp; manajemen tag
+        Full access to tag provisioning &amp; management
       </p>
       <div className="mt-4 flex items-center gap-3">
         <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/10">

@@ -28,7 +28,7 @@ export class UpdateWristbandWearerUseCase
     );
 
     if (!wristband) {
-      throw new NotFoundError("Tag tidak ditemukan");
+      throw new NotFoundError("Tag not found");
     }
 
     wristband.assertOwnerAccess(input.ownerId);

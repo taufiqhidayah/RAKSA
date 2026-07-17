@@ -25,16 +25,16 @@ import { NewTagModal } from "./new-tag-modal";
 import { useToast } from "./ui/toast";
 
 const FILTERS = [
-  { value: "", label: "Semua" },
-  { value: "unclaimed", label: "Belum diklaim" },
-  { value: "claimed", label: "Diklaim" },
-  { value: "active", label: "Aktif" },
-  { value: "disabled", label: "Nonaktif" },
-  { value: "revoked", label: "Dicabut" },
+  { value: "", label: "All" },
+  { value: "unclaimed", label: "Unclaimed" },
+  { value: "claimed", label: "Claimed" },
+  { value: "active", label: "Active" },
+  { value: "disabled", label: "Disabled" },
+  { value: "revoked", label: "Revoked" },
 ];
 
 function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("id-ID", {
+  return new Date(iso).toLocaleDateString("en-US", {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -119,11 +119,11 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
           : await deleteWristbandAction({}, formData);
 
       if (result.error) {
-        toast({ tone: "error", title: "Gagal", description: result.error });
+        toast({ tone: "error", title: "Failed", description: result.error });
       } else {
         toast({
           tone: "success",
-          title: type === "revoke" ? "Tag dicabut" : "Tag dihapus",
+          title: type === "revoke" ? "Tag revoked" : "Tag deleted",
           description: row.emergencyId,
         });
         router.refresh();
@@ -157,21 +157,21 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
         </div>
         <Button onClick={() => setNewOpen(true)} pill className="shrink-0">
           <Plus className="h-4 w-4" />
-          Daftarkan Tag
+          Register tag
         </Button>
       </div>
 
       {search && (
         <div className="flex items-center gap-2 text-sm text-slate-500">
           <span>
-            Hasil pencarian untuk <strong className="text-slate-700 dark:text-slate-200">“{search}”</strong>
+            Search results for <strong className="text-slate-700 dark:text-slate-200">“{search}”</strong>
           </span>
           <button
             type="button"
             onClick={() => updateParams((p) => { p.delete("search"); p.delete("page"); })}
             className="text-brand-600 hover:underline"
           >
-            Hapus
+            Clear
           </button>
         </div>
       )}
@@ -179,12 +179,12 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
       {items.length === 0 ? (
         <EmptyState
           icon={CreditCard}
-          title="Belum ada tag"
-          description="Belum ada tag NFC yang cocok. Daftarkan tag baru untuk mulai."
+          title="No tags yet"
+          description="No matching NFC tags. Register a new tag to get started."
           action={
             <Button onClick={() => setNewOpen(true)}>
               <Plus className="h-4 w-4" />
-              Daftarkan Tag
+              Register tag
             </Button>
           }
         />
@@ -197,9 +197,9 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                   <th className="px-5 py-3.5 font-medium">Public ID</th>
                   <th className="px-5 py-3.5 font-medium">Label</th>
                   <th className="px-5 py-3.5 font-medium">Status</th>
-                  <th className="px-5 py-3.5 font-medium">Kode Akses</th>
-                  <th className="px-5 py-3.5 font-medium">Dibuat</th>
-                  <th className="px-5 py-3.5 text-right font-medium">Aksi</th>
+                  <th className="px-5 py-3.5 font-medium">Access code</th>
+                  <th className="px-5 py-3.5 font-medium">Created</th>
+                  <th className="px-5 py-3.5 text-right font-medium">Actions</th>
                 </tr>
               </thead>
               <tbody className="admin-stagger divide-y divide-slate-50 dark:divide-slate-700/50">
@@ -214,7 +214,7 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                         type="button"
                         onClick={() => copyId(row)}
                         className="inline-flex items-center gap-1.5 font-mono text-sm font-medium text-slate-900 hover:text-brand-600 dark:text-slate-100"
-                        title="Salin Public ID"
+                        title="Copy Public ID"
                       >
                         {row.emergencyId}
                         {copiedId === row.id ? (
@@ -246,13 +246,13 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                                 className="rounded-md p-1 text-slate-400 transition-colors hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-brand-500/10"
                                 aria-label={
                                   visibleCodeIds.has(row.id)
-                                    ? "Sembunyikan kode akses"
-                                    : "Tampilkan kode akses"
+                                    ? "Hide access code"
+                                    : "Show access code"
                                 }
                                 title={
                                   visibleCodeIds.has(row.id)
-                                    ? "Sembunyikan kode"
-                                    : "Tampilkan kode"
+                                    ? "Hide code"
+                                    : "Show code"
                                 }
                               >
                                 {visibleCodeIds.has(row.id) ? (
@@ -265,8 +265,8 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                                 type="button"
                                 onClick={() => copyAccessCode(row)}
                                 className="rounded-md p-1 text-slate-400 transition-colors hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-brand-500/10"
-                                aria-label="Salin kode akses"
-                                title="Salin kode akses"
+                                aria-label="Copy access code"
+                                title="Copy access code"
                               >
                                 {copiedCodeId === row.id ? (
                                   <Check className="h-3.5 w-3.5 text-brand-600" />
@@ -286,8 +286,8 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                           type="button"
                           onClick={() => setDetailId(row.id)}
                           className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-brand-600 dark:hover:bg-slate-700"
-                          aria-label="Lihat detail"
-                          title="Detail"
+                          aria-label="View details"
+                          title="Details"
                         >
                           <Eye className="h-4 w-4" />
                         </button>
@@ -296,7 +296,7 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                           onClick={() => setPendingAction({ type: "revoke", row })}
                           disabled={row.status === "revoked"}
                           className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-amber-50 hover:text-amber-600 disabled:cursor-not-allowed disabled:opacity-40 dark:hover:bg-amber-500/10"
-                          aria-label="Cabut tag"
+                          aria-label="Revoke tag"
                           title="Revoke"
                         >
                           <Ban className="h-4 w-4" />
@@ -306,8 +306,8 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                           onClick={() => setPendingAction({ type: "delete", row })}
                           disabled={row.status !== "unclaimed"}
                           className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-40 dark:hover:bg-red-500/10"
-                          aria-label="Hapus tag"
-                          title={row.status === "unclaimed" ? "Hapus permanen" : "Hanya tag unclaimed yang bisa dihapus"}
+                          aria-label="Delete tag"
+                          title={row.status === "unclaimed" ? "Delete permanently" : "Only unclaimed tags can be deleted"}
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
@@ -322,7 +322,7 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
           {/* Pagination */}
           <div className="flex items-center justify-between border-t border-slate-100 px-5 py-3.5 text-sm dark:border-slate-700">
             <p className="text-slate-500 dark:text-slate-400">
-              {total} tag · Halaman {page} dari {totalPages}
+              {total} tags · Page {page} of {totalPages}
             </p>
             <div className="flex items-center gap-1">
               <Button
@@ -331,7 +331,7 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                 onClick={() => goToPage(page - 1)}
                 disabled={page <= 1}
               >
-                <ChevronLeft className="h-4 w-4" /> Sebelumnya
+                <ChevronLeft className="h-4 w-4" /> Previous
               </Button>
               <Button
                 variant="secondary"
@@ -339,7 +339,7 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
                 onClick={() => goToPage(page + 1)}
                 disabled={page >= totalPages}
               >
-                Berikutnya <ChevronRight className="h-4 w-4" />
+                Next <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
           </div>
@@ -363,13 +363,13 @@ export function CardsTable({ items, total, page, pageSize, status, search }: Car
 
       <ConfirmDialog
         open={Boolean(pendingAction)}
-        title={pendingAction?.type === "delete" ? "Hapus tag permanen?" : "Cabut tag ini?"}
+        title={pendingAction?.type === "delete" ? "Delete tag permanently?" : "Revoke this tag?"}
         description={
           pendingAction?.type === "delete"
-            ? `Tag ${pendingAction.row.emergencyId} akan dihapus permanen beserta kode aktivasinya. Tindakan ini tidak bisa dibatalkan.`
-            : `Tag ${pendingAction?.row.emergencyId} akan dicabut. Halaman darurat publik tidak akan menampilkan data lagi.`
+            ? `Tag ${pendingAction.row.emergencyId} will be permanently deleted along with its activation code. This action cannot be undone.`
+            : `Tag ${pendingAction?.row.emergencyId} will be revoked. The public emergency page will no longer display data.`
         }
-        confirmLabel={pendingAction?.type === "delete" ? "Hapus" : "Cabut"}
+        confirmLabel={pendingAction?.type === "delete" ? "Delete" : "Revoke"}
         loading={isPending}
         onConfirm={confirmAction}
         onClose={() => setPendingAction(null)}

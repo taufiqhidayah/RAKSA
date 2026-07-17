@@ -26,11 +26,11 @@ async function assertValidUnusedCode(
   const normalized = normalizeActivationCode(activationCode);
 
   if (!normalized) {
-    throw new ValidationError("Kode aktivasi wajib diisi", "activationCode");
+    throw new ValidationError("Activation code is required", "activationCode");
   }
 
   if (!isValidActivationCodeFormat(normalized)) {
-    throw new InvalidActivationCodeError("Format kode aktivasi tidak valid");
+    throw new InvalidActivationCodeError("Invalid activation code format");
   }
 
   const supabase = await createSupabaseServerClient();
@@ -40,7 +40,7 @@ async function assertValidUnusedCode(
 
   if (!record) {
     throw new InvalidActivationCodeError(
-      "Kode aktivasi tidak valid atau sudah digunakan",
+      "Invalid or already used activation code",
     );
   }
 
@@ -61,7 +61,7 @@ export async function verifyActivationCodeAction(
       return { error: error.message };
     }
 
-    return { error: "Terjadi kesalahan. Silakan coba lagi." };
+    return { error: "Something went wrong. Please try again." };
   }
 }
 
@@ -73,14 +73,14 @@ export async function signInAction(
   const password = String(formData.get("password") ?? "");
 
   if (!email || !password) {
-    return { error: "Email dan kata sandi wajib diisi." };
+    return { error: "Email and password are required." };
   }
 
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    return { error: "Email atau kata sandi salah." };
+    return { error: "Incorrect email or password." };
   }
 
   const redirectTo = String(formData.get("redirect") ?? "").trim();
@@ -97,15 +97,15 @@ export async function signUpAction(
   const activationCode = String(formData.get("activationCode") ?? "").trim();
 
   if (!fullName || !email || !password) {
-    return { error: "Nama, email, dan kata sandi wajib diisi." };
+    return { error: "Name, email, and password are required." };
   }
 
   if (!activationCode) {
-    return { error: "Kode aktivasi wajib diverifikasi terlebih dahulu." };
+    return { error: "Activation code must be verified first." };
   }
 
   if (password.length < 6) {
-    return { error: "Kata sandi minimal 6 karakter." };
+    return { error: "Password must be at least 6 characters." };
   }
 
   try {
@@ -115,7 +115,7 @@ export async function signUpAction(
       return { error: error.message };
     }
 
-    return { error: "Kode aktivasi tidak valid." };
+    return { error: "Invalid activation code." };
   }
 
   const supabase = await createSupabaseServerClient();
@@ -126,7 +126,7 @@ export async function signUpAction(
   }
 
   if (!data.user) {
-    return { error: "Gagal membuat akun. Silakan coba lagi." };
+    return { error: "Failed to create account. Please try again." };
   }
 
   const db = resolvePersistenceClient(supabase);
@@ -137,7 +137,7 @@ export async function signUpAction(
   });
 
   if (profileError) {
-    return { error: "Akun dibuat tetapi profil gagal disimpan. Coba masuk kembali." };
+    return { error: "Account created but profile failed to save. Try signing in again." };
   }
 
   const { useCases } = createAppContainer(supabase);
@@ -165,7 +165,7 @@ export async function claimWristbandAction(
   const activationCode = String(formData.get("activationCode") ?? "").trim();
 
   if (!activationCode) {
-    return { error: "Kode aktivasi wajib diisi." };
+    return { error: "Activation code is required." };
   }
 
   const supabase = await createSupabaseServerClient();
@@ -173,7 +173,7 @@ export async function claimWristbandAction(
 
   const user = await authService.getCurrentUser();
   if (!user) {
-    return { error: "Silakan masuk terlebih dahulu." };
+    return { error: "Please sign in first." };
   }
 
   try {

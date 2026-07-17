@@ -73,15 +73,15 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
 
   const heroChips = [
     data.approximateAge !== undefined
-      ? { icon: Cake, label: "Usia", value: `${data.approximateAge}` }
+      ? { icon: Cake, label: "Age", value: `${data.approximateAge}` }
       : null,
     data.bloodType
-      ? { icon: Droplet, label: "Golongan darah", value: data.bloodType }
+      ? { icon: Droplet, label: "Blood type", value: data.bloodType }
       : null,
     data.languageHint
       ? {
           icon: Languages,
-          label: "Bahasa",
+          label: "Language",
           value: formatLanguage(data.languageHint),
         }
       : null,
@@ -93,31 +93,31 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
 
   const medicalRows = [
     data.criticalAllergies
-      ? { label: "Alergi", value: data.criticalAllergies }
+      ? { label: "Allergies", value: data.criticalAllergies }
       : null,
     data.medicalConditions
-      ? { label: "Kondisi", value: data.medicalConditions }
+      ? { label: "Conditions", value: data.medicalConditions }
       : null,
     data.importantMedications
-      ? { label: "Obat", value: data.importantMedications }
+      ? { label: "Medications", value: data.importantMedications }
       : null,
   ].filter(Boolean) as Array<{ label: string; value: string }>;
 
   const noteRows = [
     data.profileMode === ProfileMode.CHILD_GUARDIAN && data.reunificationNote
-      ? { label: "Reunifikasi", value: data.reunificationNote }
+      ? { label: "Reunification", value: data.reunificationNote }
       : null,
     data.profileMode === ProfileMode.ELDERLY_DEPENDENT &&
     (data.disorientationNotes || data.cognitiveConditionFlag)
       ? {
-          label: "Pendampingan",
+          label: "Support",
           value:
             data.disorientationNotes ??
-            "Orang ini mungkin mengalami kebingungan atau disorientasi.",
+            "This person may be confused or disoriented.",
         }
       : null,
     data.emergencyNotes
-      ? { label: "Catatan", value: data.emergencyNotes }
+      ? { label: "Notes", value: data.emergencyNotes }
       : null,
   ].filter(Boolean) as Array<{ label: string; value: string }>;
 
@@ -140,7 +140,7 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
           <div className="mb-4 flex min-h-10 items-center justify-center">
             <Link
               href="/"
-              aria-label="Buka halaman utama RAKSA"
+              aria-label="Open raksa homepage"
               className="flex items-center no-underline transition-opacity hover:opacity-70"
             >
               <RaksaLogo variant="color" height={50} />
@@ -208,7 +208,7 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
         />
 
         {medicalRows.length > 0 && (
-          <InfoSection title="Informasi medis">
+          <InfoSection title="Medical information">
             {medicalRows.map((row) => (
               <KeyValueRow key={row.label} label={row.label} value={row.value} />
             ))}
@@ -218,7 +218,7 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
         {contacts.length > 0 && (
           <section className="mb-5">
             <h2 className="mb-3 mt-0 text-[17px] font-bold text-[#111827]">
-              Kontak darurat
+              Emergency contact
             </h2>
             <div className={`${sheetCard} divide-y divide-[#F1F0F7]`}>
               {contacts.map((contact) => (
@@ -236,14 +236,14 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
                     </strong>
                     <small className="mt-0.5 block text-[13px] text-[#6B7280]">
                       {contact.label === contact.relationship
-                        ? "Kontak darurat"
+                        ? "Emergency contact"
                         : contact.relationship}
                     </small>
                   </span>
                   {contact.isPrimary && (
                     <span className="inline-flex items-center gap-1 rounded-full bg-[#EAFBF2] px-2 py-1 text-[11px] font-semibold text-[#15803D]">
                       <Star size={11} fill="currentColor" aria-hidden="true" />
-                      Utama
+                      Primary
                     </span>
                   )}
                   <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#EDE9FE] text-[#6D4AFF]">
@@ -261,11 +261,11 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
         )}
 
         {noteRows.length > 0 && (
-          <InfoSection title="Catatan">
+          <InfoSection title="Notes">
             {noteRows.map((row) => (
               <KeyValueRow
                 key={row.label}
-                label={row.label === "Catatan" ? "" : row.label}
+                label={row.label === "Notes" ? "" : row.label}
                 value={row.value}
                 stacked
               />
@@ -275,12 +275,12 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
 
         <footer className="mt-1 border-t border-[#ECEAF3] pt-6 text-center">
           <p className="m-0 text-[13px] font-medium text-[#6B7280]">
-            Diverifikasi oleh pemilik · Informasi profil darurat RAKSA
+            Verified by owner · raksa emergency profile information
           </p>
           <p className="mb-0 mt-1 text-[12px] text-[#9CA3AF]">
             {data.lastConfirmedAt
-              ? `Terakhir dikonfirmasi ${formatDate(data.lastConfirmedAt)}`
-              : "Tanggal konfirmasi belum tersedia"}
+              ? `Last confirmed ${formatDate(data.lastConfirmedAt)}`
+              : "Confirmation date not available"}
           </p>
           <p className="mx-auto mb-0 mt-4 max-w-[420px] text-[12px] leading-relaxed text-[#9CA3AF]">
             {disclaimer}
@@ -289,7 +289,7 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
             href="/"
             className="mt-5 inline-block text-[12px] font-medium text-[#9CA3AF] no-underline transition-colors hover:text-[#6D4AFF]"
           >
-            © 2026 RAKSA
+            © 2026 raksa
           </Link>
         </footer>
       </section>
@@ -349,27 +349,27 @@ function KeyValueRow({
 function getModeLabel(mode: PublicEmergencyPageDto["profileMode"]): string {
   switch (mode) {
     case ProfileMode.CHILD_GUARDIAN:
-      return "Profil perlindungan anak";
+      return "Child protection profile";
     case ProfileMode.ELDERLY_DEPENDENT:
-      return "Profil pendampingan lansia";
+      return "Elderly support profile";
     default:
-      return "Profil Emergency";
+      return "Emergency profile";
   }
 }
 
 function getDisclaimer(mode: PublicEmergencyPageDto["profileMode"]): string {
   switch (mode) {
     case ProfileMode.CHILD_GUARDIAN:
-      return "Informasi ini diberikan oleh wali. Verifikasi identitas penjemput sebelum menyerahkan anak.";
+      return "This information is provided by a guardian. Verify the pickup person's identity before releasing the child.";
     case ProfileMode.ELDERLY_DEPENDENT:
-      return "Informasi ini diberikan oleh keluarga dan hanya untuk membantu dalam keadaan darurat.";
+      return "This information is provided by family and is intended to assist in emergency situations only.";
     default:
-      return "Informasi ini diberikan oleh pemilik gelang dan bukan pengganti penilaian tenaga medis.";
+      return "This information is provided by the band owner and is not a substitute for professional medical assessment.";
   }
 }
 
 function formatDate(value: string): string {
-  return new Intl.DateTimeFormat("id-ID", {
+  return new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",

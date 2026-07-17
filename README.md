@@ -8,35 +8,35 @@
   <em>by Taufiq Hidayah · Muh. Alfian Lolo P</em>
 </p>
 
-Sistem identifikasi darurat berbasis band NFC/QR. Orang di sekitar dapat mengetuk, memindai, atau mencari Emergency ID untuk melihat informasi kritis dan menghubungi keluarga — tanpa login.
+NFC/QR emergency identification band. Anyone nearby can tap, scan, or look up an Emergency ID to see critical information and call family — no login required.
 
-Satu akun mengelola banyak band: diri sendiri, anak, atau orang tua lanjut usia.
+One account manages multiple bands: yourself, a child, or an elderly parent.
 
 ---
 
-## Fitur utama
+## Key features
 
-| Mode | Skenario | Prioritas halaman publik |
-|------|----------|--------------------------|
-| **Darurat dewasa** (`adult_emergency`) | Tidak sadar / tidak bisa berkomunikasi | Info medis + kontak darurat |
-| **Wali anak** (`child_guardian`) | Anak terpisah di tempat ramai | Telepon orang tua / wali |
-| **Orang tua lansia** (`elderly_dependent`) | Bingung, tersesat, atau demensia | Telepon keluarga + konteks medis |
+| Mode | Scenario | Public page priority |
+|------|----------|----------------------|
+| **Adult emergency** (`adult_emergency`) | Unconscious / unable to communicate | Medical info + emergency contacts |
+| **Child guardian** (`child_guardian`) | Child separated in a crowded place | Call parent / guardian |
+| **Elderly dependent** (`elderly_dependent`) | Confused, lost, or living with dementia | Call family + medical context |
 
-**Akses publik (tanpa login):** NFC · QR · pencarian Emergency ID manual
+**Public access (no login):** NFC · QR · manual Emergency ID lookup
 
-**Dashboard pemilik:** klaim band, setup profil, kelola keluarga, riwayat pemindaian, nonaktifkan band
+**Owner dashboard:** claim a band, set up a profile, manage the family, review scan history, disable a band
 
 ---
 
 ## Stack
 
-| Lapisan | Teknologi |
-|---------|-----------|
+| Layer | Technology |
+|-------|------------|
 | Frontend | Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS 4 |
 | Backend | Supabase (PostgreSQL, Auth, RLS) |
-| Validasi | Zod |
-| Tes | Vitest |
-| Arsitektur | Clean Architecture + SOLID — lihat [ARCHITECTURE.md](./ARCHITECTURE.md) |
+| Validation | Zod |
+| Tests | Vitest |
+| Architecture | Clean Architecture + SOLID — see [ARCHITECTURE.md](./ARCHITECTURE.md) |
 
 **Node.js** ≥ 20
 
@@ -58,73 +58,73 @@ npm install
 cp .env.example .env.local
 ```
 
-Isi nilai berikut di `.env.local`:
+Fill in `.env.local`:
 
-| Variabel | Keterangan |
-|----------|------------|
-| `NEXT_PUBLIC_SUPABASE_URL` | URL proyek Supabase |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key (aman untuk client) |
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key (safe for the client) |
 | `SUPABASE_SERVICE_ROLE_KEY` | Service role key (**server only**) |
-| `NEXT_PUBLIC_APP_URL` | URL app, mis. `http://localhost:3000` |
-| `SUPERADMIN_USER_ID` | UUID user superadmin (opsional) |
-| `SUPERADMIN_DISPLAY_NAME` | Nama tampilan di dashboard admin (opsional) |
+| `NEXT_PUBLIC_APP_URL` | App URL, e.g. `http://localhost:3000` |
+| `SUPERADMIN_USER_ID` | Superadmin user UUID (optional) |
+| `SUPERADMIN_DISPLAY_NAME` | Display name in the admin dashboard (optional) |
 
 ### 3. Database
 
-Terapkan migrasi dengan [Supabase CLI](https://supabase.com/docs/guides/cli):
+Apply migrations with the [Supabase CLI](https://supabase.com/docs/guides/cli):
 
 ```bash
 supabase db push
 ```
 
-Migrasi ada di `supabase/migrations/`:
+Migrations live in `supabase/migrations/`:
 
-- `00001_initial_schema` — skema inti
+- `00001_initial_schema` — core schema
 - `00002_rls_policies` — Row Level Security
-- `00003_add_device_type` — tipe perangkat (bracelet / necklace / keychain)
+- `00003_add_device_type` — device type (bracelet / necklace / keychain)
 
-### 4. Jalankan
+### 4. Run
 
 ```bash
 npm run dev
 ```
 
-Buka [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
 ---
 
 ## Scripts
 
-| Perintah | Deskripsi |
-|----------|-----------|
-| `npm run dev` | Server development |
-| `npm run build` | Build production |
-| `npm start` | Jalankan build production |
-| `npm run typecheck` | Cek TypeScript |
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm start` | Run production build |
+| `npm run typecheck` | TypeScript check |
 | `npm run lint` | ESLint |
-| `npm test` | Unit test (Vitest) |
+| `npm test` | Unit tests (Vitest) |
 | `npm run test:watch` | Vitest watch mode |
 | `npm run test:coverage` | Coverage report |
 
 ---
 
-## Struktur proyek
+## Project structure
 
 ```
 src/
 ├── app/                    # Next.js App Router (thin controllers)
 │   ├── (marketing)/        # Landing page
-│   ├── (public)/           # Halaman darurat publik + lookup
+│   ├── (public)/           # Public emergency page + lookup
 │   ├── (auth)/             # Login & setup
-│   ├── (dashboard)/        # Dashboard keluarga
-│   ├── (admin)/            # Panel superadmin
+│   ├── (dashboard)/        # Family dashboard
+│   ├── (admin)/            # Superadmin panel
 │   └── api/                # API routes
 ├── core/
 │   ├── domain/             # Entities, value objects, ports, errors
 │   └── application/        # Use cases & DTOs
-├── infrastructure/         # Adapter Supabase, auth, mappers
-├── presentation/           # Komponen UI & HTTP helpers
-└── shared/                 # DI container, config, utilitas
+├── infrastructure/         # Supabase adapters, auth, mappers
+├── presentation/           # UI components & HTTP helpers
+└── shared/                 # DI container, config, utilities
 
 supabase/migrations/        # PostgreSQL + RLS
 tests/
@@ -133,37 +133,37 @@ tests/
 └── e2e/
 ```
 
-**Dependency rule:** ketergantungan mengarah ke dalam. Domain tidak mengenal Next.js atau Supabase.
+**Dependency rule:** dependencies point inward. The domain does not know about Next.js or Supabase.
 
 ---
 
-## Alur singkat
+## Quick flow
 
 ```
-Ketuk NFC / Scan QR / Lookup Emergency ID
+Tap NFC / Scan QR / Lookup Emergency ID
         │
         ▼
-  Halaman darurat publik  (/[emergencyId] atau /lookup)
+  Public emergency page  (/[emergencyId] or /lookup)
         │
-        ├── Info minimum sesuai mode band
-        ├── Tombol telepon / WhatsApp
-        └── Catat pemindaian (+ notifikasi ke pemilik jika dependen)
+        ├── Minimum info for the band’s mode
+        ├── Call / WhatsApp buttons
+        └── Log the scan (+ notify the owner for dependents)
 ```
 
-Pemilik akun: **Login** → **Claim** (Kode Aktivasi) → **Setup profil** → band aktif di dashboard.
+Account holder: **Login** → **Claim** (Activation Code) → **Profile setup** → band active on the dashboard.
 
 ---
 
-## Dokumentasi
+## Documentation
 
-| Dokumen | Isi |
-|---------|-----|
-| [product.indonesia.md](./product.indonesia.md) | Spesifikasi produk (ID) |
+| Document | Contents |
+|----------|----------|
+| [product.indonesia.md](./product.indonesia.md) | Product specification (ID) |
 | [product.english.md](./product.english.md) | Product specification (EN) |
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | Clean Architecture, SOLID, use cases |
 
 ---
 
-## Lisensi
+## License
 
-Private — prototipe kompetisi.
+Private — competition prototype.

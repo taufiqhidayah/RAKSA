@@ -26,8 +26,8 @@ interface NavEntry {
 
 const NAV: NavEntry[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutGrid, exact: true },
-  { href: "/claim", label: "Tambah Anggota", icon: Ticket },
-  { href: "/notifications", label: "Notifikasi", icon: Bell },
+  { href: "/claim", label: "Add member", icon: Ticket },
+  { href: "/notifications", label: "Notifications", icon: Bell },
 ];
 
 function isActive(pathname: string, href: string, exact?: boolean): boolean {
@@ -47,11 +47,11 @@ function SidebarPanel({
 }) {
   return (
     <aside className="flex h-full w-[264px] flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
-      <Link href="/dashboard" className="flex items-center gap-3 px-6 pt-6" aria-label="RAKSA Keluarga">
+      <Link href="/dashboard" className="flex items-center gap-3 px-6 pt-6" aria-label="raksa Family">
         <RaksaLogo variant="color" height={52} className="dark:hidden" />
         <RaksaLogo variant="white" height={52} className="hidden dark:block" />
         <span className="rounded-full bg-brand-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-600 dark:bg-brand-950/40 dark:text-brand-300">
-          Keluarga
+          Family
         </span>
       </Link>
 
@@ -101,7 +101,7 @@ function SidebarPanel({
           className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600 disabled:opacity-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-red-500/40 dark:hover:bg-red-500/10 dark:hover:text-red-400"
         >
           <LogOut className="h-4 w-4" />
-          {signingOut ? "Keluar…" : "Keluar"}
+          {signingOut ? "Signing out…" : "Sign out"}
         </button>
       </div>
     </aside>
@@ -111,10 +111,10 @@ function SidebarPanel({
 /** App-style bottom tab bar for mobile. */
 function MobileTabBar({ pathname }: { pathname: string }) {
   const tabs: { href: string; label: string; icon: LucideIcon; exact?: boolean }[] = [
-    { href: "/dashboard", label: "Beranda", icon: Home, exact: true },
-    { href: "/claim", label: "Tambah", icon: Plus },
-    { href: "/notifications", label: "Notifikasi", icon: Bell },
-    { href: "/profile", label: "Akun", icon: User },
+    { href: "/dashboard", label: "Home", icon: Home, exact: true },
+    { href: "/claim", label: "Add", icon: Plus },
+    { href: "/notifications", label: "Notifications", icon: Bell },
+    { href: "/profile", label: "Account", icon: User },
   ];
 
   return (
@@ -200,19 +200,19 @@ export function DashboardShell({
                 className="inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
               >
                 <Home className="h-4 w-4" />
-                Beranda
+                Home
               </Link>
               <Link
                 href="/notifications"
                 className="relative rounded-xl p-2 text-slate-500 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
-                aria-label="Notifikasi"
+                aria-label="Notifications"
               >
                 <Bell className="h-5 w-5" />
                 <span className="absolute right-2 top-2 h-1.5 w-1.5 rounded-full bg-brand-500 ring-2 ring-white dark:ring-slate-900" />
               </Link>
               <Link
                 href="/profile"
-                aria-label="Profil"
+                aria-label="Profile"
                 className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-xs font-bold text-white transition-transform hover:scale-105"
               >
                 {initials}

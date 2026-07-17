@@ -98,7 +98,7 @@ export class RegisterWristbandUseCase
       const existing = await this.deps.wristbandRepository.findByEmergencyId(candidate);
       if (!existing) return candidate;
     }
-    throw new ConflictError("Gagal menghasilkan Emergency ID unik, coba lagi");
+    throw new ConflictError("Failed to generate unique Emergency ID, please try again");
   }
 
   private async generateUniquePublicToken(): Promise<PublicToken> {
@@ -107,7 +107,7 @@ export class RegisterWristbandUseCase
       const existing = await this.deps.wristbandRepository.findByPublicToken(candidate);
       if (!existing) return candidate;
     }
-    throw new ConflictError("Gagal menghasilkan public token unik, coba lagi");
+    throw new ConflictError("Failed to generate unique public token, please try again");
   }
 
   private async generateUniqueActivationCode(): Promise<string> {
@@ -116,6 +116,6 @@ export class RegisterWristbandUseCase
       const exists = await this.deps.activationCodeRepository.existsByCode(candidate);
       if (!exists) return candidate;
     }
-    throw new ConflictError("Gagal menghasilkan kode aktivasi unik, coba lagi");
+    throw new ConflictError("Failed to generate unique activation code, please try again");
   }
 }

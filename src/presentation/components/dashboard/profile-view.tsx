@@ -121,21 +121,21 @@ export function ProfileView({
         <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">{userEmail}</p>
       </div>
 
-      <Group label="Akun">
-        <Row icon={Users} label="Tag Keluarga" href="/dashboard" badge={String(tagCount)} />
-        <Row icon={Ticket} label="Tambah Anggota" href="/claim" />
-        <Row icon={Bell} label="Notifikasi" href="/notifications" />
+      <Group label="Account">
+        <Row icon={Users} label="Family tags" href="/dashboard" badge={String(tagCount)} />
+        <Row icon={Ticket} label="Add member" href="/claim" />
+        <Row icon={Bell} label="Notifications" href="/notifications" />
       </Group>
 
-      <Group label="Preferensi">
+      <Group label="Preferences">
         <ThemeToggle />
       </Group>
 
-      <Group label="Lainnya">
-        <Row icon={Home} label="Beranda" href="/" />
+      <Group label="Other">
+        <Row icon={Home} label="Home" href="/" />
         <Row
           icon={LogOut}
-          label={signingOut ? "Keluar…" : "Keluar"}
+          label={signingOut ? "Signing out…" : "Sign out"}
           onClick={handleSignOut}
           danger
         />

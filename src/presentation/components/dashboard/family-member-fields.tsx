@@ -12,15 +12,15 @@ interface RoleOption {
 }
 
 const ROLE_OPTIONS: RoleOption[] = [
-  { value: WearerRole.CHILD, label: "Anak", icon: Baby },
-  { value: WearerRole.ELDERLY_PARENT, label: "Orang tua", icon: UserRound },
-  { value: WearerRole.SELF, label: "Diri sendiri", icon: User },
+  { value: WearerRole.CHILD, label: "Child", icon: Baby },
+  { value: WearerRole.ELDERLY_PARENT, label: "Parent", icon: UserRound },
+  { value: WearerRole.SELF, label: "Myself", icon: User },
 ];
 
 const NAME_HINT: Record<string, { label: string; placeholder: string }> = {
-  [WearerRole.CHILD]: { label: "Nama anak", placeholder: "mis. Ani" },
-  [WearerRole.ELDERLY_PARENT]: { label: "Nama orang tua", placeholder: "mis. Ibu Siti" },
-  [WearerRole.SELF]: { label: "Nama Anda", placeholder: "mis. Budi" },
+  [WearerRole.CHILD]: { label: "Child's name", placeholder: "e.g. Ani" },
+  [WearerRole.ELDERLY_PARENT]: { label: "Parent's name", placeholder: "e.g. Jane Doe" },
+  [WearerRole.SELF]: { label: "Your name", placeholder: "e.g. John" },
 };
 
 export function FamilyMemberFields({
@@ -41,7 +41,7 @@ export function FamilyMemberFields({
     <div className="space-y-4">
       <fieldset>
         <legend className="mb-1.5 block text-sm font-medium text-slate-700 dark:text-slate-200">
-          Untuk siapa tag ini?
+          Who is this tag for?
         </legend>
         <div className="grid grid-cols-3 gap-2">
           {ROLE_OPTIONS.map((option) => {
@@ -101,7 +101,7 @@ export function FamilyMemberFields({
         />
         <span className="flex items-center gap-1.5 text-sm font-medium text-slate-800 dark:text-slate-200">
           <BellRing className="h-4 w-4 text-slate-400 dark:text-slate-500" />
-          Beri tahu saat tag dipindai
+          Notify me when this tag is scanned
         </span>
       </label>
     </div>

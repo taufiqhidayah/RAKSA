@@ -18,9 +18,9 @@ export function RevealCodeModal({ open, onClose, result }: RevealCodeModalProps)
     <Modal
       open={open}
       onClose={onClose}
-      title="Tag berhasil didaftarkan"
-      description="Simpan Kode Aktivasi ini sekarang — cetak di paket/manual tag. Kode diberikan sekali ke pelanggan untuk klaim."
-      footer={<Button onClick={onClose}>Selesai</Button>}
+      title="Tag registered successfully"
+      description="Save this Activation Code now — print it on the packaging/tag manual. The code is given once to the customer for claiming."
+      footer={<Button onClick={onClose}>Done</Button>}
     >
       <RevealCodeContent result={result} />
     </Modal>

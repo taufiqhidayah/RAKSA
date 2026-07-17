@@ -21,13 +21,13 @@ export interface MutationActionState {
 const registerSchema = z.object({
   profileMode: z.nativeEnum(ProfileMode).default(ProfileMode.ADULT_EMERGENCY),
   wearerRole: z.nativeEnum(WearerRole).default(WearerRole.SELF),
-  wearerLabel: z.string().trim().max(80, "Label maksimal 80 karakter").optional(),
+  wearerLabel: z.string().trim().max(80, "Label must be at most 80 characters").optional(),
   deviceType: z.nativeEnum(DeviceType).optional(),
 });
 
 function mapError(error: unknown): string {
   if (error instanceof DomainError) return error.message;
-  return "Terjadi kesalahan. Silakan coba lagi.";
+  return "Something went wrong. Please try again.";
 }
 
 export async function registerWristbandAction(
@@ -46,7 +46,7 @@ export async function registerWristbandAction(
     for (const issue of parsed.error.issues) {
       fieldErrors[issue.path.join(".")] = issue.message;
     }
-    return { error: "Periksa kembali input Anda.", fieldErrors };
+    return { error: "Please check your input.", fieldErrors };
   }
 
   try {
@@ -83,7 +83,7 @@ export async function revokeWristbandAction(
 ): Promise<MutationActionState> {
   const wristbandId = String(formData.get("wristbandId") ?? "").trim();
   if (!wristbandId) {
-    return { error: "ID tag wajib diisi." };
+    return { error: "Tag ID is required." };
   }
 
   try {
@@ -103,7 +103,7 @@ export async function deleteWristbandAction(
 ): Promise<MutationActionState> {
   const wristbandId = String(formData.get("wristbandId") ?? "").trim();
   if (!wristbandId) {
-    return { error: "ID tag wajib diisi." };
+    return { error: "Tag ID is required." };
   }
 
   try {

@@ -2,7 +2,7 @@
   "name": "raksa",
   "version": "0.1.0",
   "private": true,
-  "description": "GelangSiaga (RAKSA-TAG) — emergency identification system",
+  "description": "raksa — emergency identification system",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

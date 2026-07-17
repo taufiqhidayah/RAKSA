@@ -26,7 +26,7 @@ export function LandingHero() {
             className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/85 backdrop-blur"
           >
             <Nfc className="h-3.5 w-3.5 text-brand-300" />
-            NFC &amp; QR wearable · built by the RAKSA-TAG team
+            NFC &amp; QR wearable · built by the raksa team
           </Reveal>
 
           <Reveal

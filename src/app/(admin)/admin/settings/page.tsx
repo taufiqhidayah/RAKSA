@@ -31,7 +31,7 @@ function ConfigRow({
         </span>
       ) : (
         <span className="inline-flex items-center gap-1 text-xs font-medium text-amber-600">
-          <AlertTriangle className="h-4 w-4" /> Belum diset
+          <AlertTriangle className="h-4 w-4" /> Not set
         </span>
       )}
     </div>
@@ -48,7 +48,7 @@ export default async function AdminSettingsPage() {
     <div>
       <PageHeader
         title="Settings"
-        description="Informasi akun superadmin dan konfigurasi sistem."
+        description="Superadmin account information and system configuration."
         breadcrumbs={[{ label: "Admin", href: "/admin" }, { label: "Settings" }]}
       />
 
@@ -59,18 +59,18 @@ export default async function AdminSettingsPage() {
               <ShieldCheck className="h-5 w-5" />
             </span>
             <div>
-              <h2 className="text-base font-semibold text-slate-900 dark:text-white">Akun Superadmin</h2>
+              <h2 className="text-base font-semibold text-slate-900 dark:text-white">Superadmin account</h2>
               <p className="text-sm text-slate-500 dark:text-slate-400">{user.email}</p>
             </div>
           </div>
           <p className="mt-4 rounded-xl bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-700/40 dark:text-slate-400">
-            Otorisasi ditentukan oleh <code className="font-mono">SUPERADMIN_USER_ID</code> di environment server, bukan dari database. Autentikasi & password dikelola oleh Supabase Auth.
+            Authorization is determined by <code className="font-mono">SUPERADMIN_USER_ID</code> in the server environment, not from the database. Authentication and passwords are managed by Supabase Auth.
           </p>
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[var(--shadow-soft)] dark:border-slate-700 dark:bg-slate-800">
           <div className="border-b border-slate-100 px-4 py-3 dark:border-slate-700">
-            <h2 className="text-base font-semibold text-slate-900 dark:text-white">Konfigurasi</h2>
+            <h2 className="text-base font-semibold text-slate-900 dark:text-white">Configuration</h2>
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-700/50">
             <ConfigRow
@@ -81,7 +81,7 @@ export default async function AdminSettingsPage() {
             />
             <ConfigRow
               label="Service Role Key"
-              value="Diperlukan untuk operasi admin (bypass RLS)"
+              value="Required for admin operations (bypass RLS)"
               ok={serviceRoleConfigured}
               icon={KeyRound}
             />

@@ -25,28 +25,28 @@ export default async function SetupPage({ searchParams }: SetupPageProps) {
       <main className="auth-panel">
         <div className="auth-panel__inner">
           <div className="auth-brand-row">
-            <Link href="/" className="auth-brand" aria-label="RAKSA">
+            <Link href="/" className="auth-brand" aria-label="raksa">
               <RaksaLogo variant="color" height={46} />
             </Link>
           </div>
 
           <div className="auth-panel__body">
             <div className="auth-intro">
-              <h1 className="auth-intro__title">Setup Profil Darurat</h1>
+              <h1 className="auth-intro__title">Emergency profile setup</h1>
               <p className="auth-intro__desc">
-                Tag berhasil diklaim. Wizard setup profil akan tersedia di sini
-                — pilih mode profil, isi informasi darurat, dan aktifkan tag.
+                Tag claimed successfully. The profile setup wizard will be available here
+                — choose a profile mode, fill in emergency info, and activate your tag.
               </p>
             </div>
 
             {params.wristband && (
               <p className="auth-setup__id">
-                ID Tag: <code>{params.wristband}</code>
+                Tag ID: <code>{params.wristband}</code>
               </p>
             )}
 
             <Link href="/dashboard" className="auth-btn auth-btn--primary auth-btn--full">
-              Ke Dashboard
+              Go to dashboard
             </Link>
           </div>
         </div>

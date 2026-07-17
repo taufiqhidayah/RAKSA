@@ -39,11 +39,11 @@ export class ClaimWristbandUseCase
     const normalized = normalizeActivationCode(input.activationCode);
 
     if (!normalized) {
-      throw new ValidationError("Kode aktivasi wajib diisi", "activationCode");
+      throw new ValidationError("Activation code is required", "activationCode");
     }
 
     if (!isValidActivationCodeFormat(normalized)) {
-      throw new InvalidActivationCodeError("Format kode aktivasi tidak valid");
+      throw new InvalidActivationCodeError("Invalid activation code format");
     }
 
     const activationCode =
@@ -51,7 +51,7 @@ export class ClaimWristbandUseCase
 
     if (!activationCode) {
       throw new InvalidActivationCodeError(
-        "Kode aktivasi tidak valid atau sudah digunakan",
+        "Activation code is invalid or already used",
       );
     }
 

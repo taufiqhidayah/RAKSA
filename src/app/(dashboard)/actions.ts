@@ -15,24 +15,24 @@ export interface FamilyActionState {
 }
 
 const addSchema = z.object({
-  activationCode: z.string().trim().min(1, "Kode aktivasi wajib diisi"),
+  activationCode: z.string().trim().min(1, "Activation code is required"),
   wearerRole: z.nativeEnum(WearerRole),
   wearerLabel: z
     .string()
     .trim()
-    .min(1, "Nama anggota wajib diisi")
-    .max(80, "Nama maksimal 80 karakter"),
+    .min(1, "Member name is required")
+    .max(80, "Name must be at most 80 characters"),
   notifyOnScan: z.boolean(),
 });
 
 const editSchema = z.object({
-  wristbandId: z.string().trim().min(1, "Tag tidak valid"),
+  wristbandId: z.string().trim().min(1, "Invalid tag"),
   wearerRole: z.nativeEnum(WearerRole),
   wearerLabel: z
     .string()
     .trim()
-    .min(1, "Nama anggota wajib diisi")
-    .max(80, "Nama maksimal 80 karakter"),
+    .min(1, "Member name is required")
+    .max(80, "Name must be at most 80 characters"),
   notifyOnScan: z.boolean(),
 });
 
@@ -46,7 +46,7 @@ function toFieldErrors(error: z.ZodError): Record<string, string> {
 
 function mapError(error: unknown): string {
   if (error instanceof DomainError) return error.message;
-  return "Terjadi kesalahan. Silakan coba lagi.";
+  return "Something went wrong. Please try again.";
 }
 
 /**
@@ -65,7 +65,7 @@ export async function addFamilyMemberAction(
   });
 
   if (!parsed.success) {
-    return { error: "Periksa kembali input Anda.", fieldErrors: toFieldErrors(parsed.error) };
+    return { error: "Please check your input.", fieldErrors: toFieldErrors(parsed.error) };
   }
 
   const supabase = await createSupabaseServerClient();
@@ -73,7 +73,7 @@ export async function addFamilyMemberAction(
 
   const user = await authService.getCurrentUser();
   if (!user) {
-    return { error: "Silakan masuk terlebih dahulu." };
+    return { error: "Please sign in first." };
   }
 
   try {
@@ -105,7 +105,7 @@ export async function updateFamilyMemberAction(
   });
 
   if (!parsed.success) {
-    return { error: "Periksa kembali input Anda.", fieldErrors: toFieldErrors(parsed.error) };
+    return { error: "Please check your input.", fieldErrors: toFieldErrors(parsed.error) };
   }
 
   const supabase = await createSupabaseServerClient();
@@ -113,7 +113,7 @@ export async function updateFamilyMemberAction(
 
   const user = await authService.getCurrentUser();
   if (!user) {
-    return { error: "Silakan masuk terlebih dahulu." };
+    return { error: "Please sign in first." };
   }
 
   try {

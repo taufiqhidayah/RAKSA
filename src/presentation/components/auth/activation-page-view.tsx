@@ -14,9 +14,9 @@ interface ActivationStepsProps {
 
 function ActivationSteps({ currentStep }: ActivationStepsProps) {
   const steps = [
-    { number: 1, label: "Kode Aktivasi" },
-    { number: 2, label: "Masuk / Daftar" },
-    { number: 3, label: "Setup Profil" },
+    { number: 1, label: "Activation Code" },
+    { number: 2, label: "Sign in / Sign up" },
+    { number: 3, label: "Profile setup" },
   ] as const;
 
   return (
@@ -42,7 +42,7 @@ function ActivationSteps({ currentStep }: ActivationStepsProps) {
 
 function AuthBrand() {
   return (
-    <Link href="/" className="auth-brand" aria-label="RAKSA">
+    <Link href="/" className="auth-brand" aria-label="raksa">
       <RaksaLogo variant="color" height={80} />
     </Link>
   );
@@ -77,18 +77,18 @@ export function ActivationPageView({
   const onMobileForm = twoStep && mobileStep === "form";
   const title = onMobileForm
     ? authMode === "login"
-      ? "Login"
-      : "Daftar"
+      ? "Sign in"
+      : "Sign up"
     : variant === "claim-only"
-      ? "Klaim Tag"
-      : "Aktivasi Tag";
+      ? "Claim tag"
+      : "Activate tag";
   const description = showClaim
-    ? "Masukkan Kode Aktivasi dari paket tag baru untuk menghubungkannya ke akun Anda."
+    ? "Enter the activation code from your new tag pack to link it to your account."
     : onMobileForm
       ? authMode === "login"
-        ? "Masuk ke akun Anda untuk mengelola tag darurat."
-        : "Buat akun baru dengan Kode Aktivasi dari paket tag Anda."
-      : "Masuk ke akun yang sudah ada, atau daftar dengan Kode Aktivasi dari paket tag.";
+        ? "Sign in to your account to manage emergency tags."
+        : "Create a new account with the activation code from your tag pack."
+      : "Sign in to an existing account, or sign up with the activation code from your tag pack.";
 
   return (
     <div
@@ -103,7 +103,7 @@ export function ActivationPageView({
                 type="button"
                 className="auth-back"
                 onClick={() => setMobileStep("intro")}
-                aria-label="Kembali"
+                aria-label="Back"
               >
                 <ChevronLeft size={18} strokeWidth={2.4} />
               </button>
@@ -127,14 +127,14 @@ export function ActivationPageView({
                   className="auth-btn auth-btn--primary auth-btn--full"
                   onClick={() => openForm("login")}
                 >
-                  Masuk ke akun
+                  Sign in to your account
                 </button>
                 <button
                   type="button"
                   className="auth-btn auth-btn--outline auth-btn--full"
                   onClick={() => openForm("register")}
                 >
-                  Daftar dengan Kode Aktivasi
+                  Sign up with activation code
                 </button>
               </div>
             )}
@@ -157,11 +157,11 @@ export function ActivationPageView({
               <>
                 <ClaimActivationForm />
                 <div className="auth-card__info">
-                  <h2 className="auth-card__info-title">Setelah klaim berhasil</h2>
+                  <h2 className="auth-card__info-title">After a successful claim</h2>
                   <ul className="auth-card__info-list">
-                    <li>Pilih mode profil (diri sendiri, anak, atau lansia)</li>
-                    <li>Isi informasi darurat dan kontak keluarga</li>
-                    <li>Tinjau halaman publik lalu aktifkan tag</li>
+                    <li>Choose a profile mode (yourself, child, or elderly)</li>
+                    <li>Fill in emergency info and family contacts</li>
+                    <li>Review the public page, then activate your tag</li>
                   </ul>
                 </div>
               </>

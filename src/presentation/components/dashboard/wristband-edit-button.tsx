@@ -49,21 +49,21 @@ export function WristbandEditButton({ tag }: { tag: WristbandSummaryDto }) {
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="Edit anggota keluarga"
+            aria-label="Edit family member"
             className="dash-animate-up relative max-h-[90vh] w-full overflow-y-auto rounded-t-3xl border border-slate-200 bg-white p-5 shadow-[var(--shadow-float)] dark:border-slate-800 dark:bg-slate-900 sm:max-w-md sm:rounded-3xl"
             style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1.25rem)" }}
           >
             <div className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-slate-200 dark:bg-slate-700 sm:hidden" />
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">Edit Anggota</h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Ubah peran & nama anggota keluarga.</p>
+                <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">Edit member</h2>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Change role and display name.</p>
               </div>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 className="rounded-xl p-2 text-slate-400 hover:bg-slate-100 dark:text-slate-500 dark:hover:bg-slate-800"
-                aria-label="Tutup"
+                aria-label="Close"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -93,14 +93,14 @@ export function WristbandEditButton({ tag }: { tag: WristbandSummaryDto }) {
                   onClick={() => setOpen(false)}
                   className="flex-1 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
                 >
-                  Batal
+                  Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={pending}
                   className="flex-1 rounded-xl bg-brand-600 px-4 py-3 text-sm font-semibold text-white shadow-[0_10px_24px_-10px_rgba(124,58,237,0.75)] transition-all hover:bg-brand-500 disabled:pointer-events-none disabled:opacity-60"
                 >
-                  {pending ? "Menyimpan…" : "Simpan"}
+                  {pending ? "Saving…" : "Save"}
                 </button>
               </div>
             </form>

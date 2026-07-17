@@ -43,7 +43,7 @@ const DEVICE_ICON: Record<string, LucideIcon> = {
 
 function formatDate(iso?: string): string | null {
   if (!iso) return null;
-  return new Intl.DateTimeFormat("id-ID", {
+  return new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "short",
     year: "numeric",
@@ -100,15 +100,15 @@ export function WristbandCard({ tag, index = 0 }: WristbandCardProps) {
         {activatedDate && (
           <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
             <CalendarClock className="h-4 w-4 shrink-0 text-slate-400 dark:text-slate-500" />
-            <dt className="sr-only">Aktif sejak</dt>
-            <dd>Aktif sejak {activatedDate}</dd>
+            <dt className="sr-only">Active since</dt>
+            <dd>Active since {activatedDate}</dd>
           </div>
         )}
         {tag.notifyOnScan && (
           <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
             <BellRing className="h-4 w-4 shrink-0 text-slate-400 dark:text-slate-500" />
-            <dt className="sr-only">Notifikasi</dt>
-            <dd>Notifikasi saat dipindai</dd>
+            <dt className="sr-only">Notifications</dt>
+            <dd>Notify on scan</dd>
           </div>
         )}
       </dl>
@@ -119,7 +119,7 @@ export function WristbandCard({ tag, index = 0 }: WristbandCardProps) {
             href="/setup"
             className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgba(124,58,237,0.7)] transition-all hover:-translate-y-0.5 hover:bg-brand-500"
           >
-            Lanjutkan Setup
+            Continue setup
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         ) : (
@@ -127,7 +127,7 @@ export function WristbandCard({ tag, index = 0 }: WristbandCardProps) {
             href={`/wristbands/${tag.id}`}
             className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-slate-600 dark:hover:bg-slate-800"
           >
-            Detail
+            Details
             <ChevronRight className="h-4 w-4 text-slate-400 dark:text-slate-500" />
           </Link>
         )}

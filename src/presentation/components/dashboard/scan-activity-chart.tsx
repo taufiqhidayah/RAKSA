@@ -9,7 +9,7 @@ const VW = 100;
 const VH = 40;
 
 function formatDay(date: string): string {
-  return new Intl.DateTimeFormat("id-ID", { day: "numeric", month: "short" }).format(
+  return new Intl.DateTimeFormat("en-US", { day: "numeric", month: "short" }).format(
     new Date(`${date}T00:00:00Z`),
   );
 }
@@ -37,13 +37,13 @@ export function ScanActivityChart({ points }: ScanActivityChartProps) {
       <div className="flex items-start justify-between gap-3">
         <div>
           <h2 className="text-base font-semibold tracking-tight text-slate-900 dark:text-slate-100">
-            Aktivitas Pemindaian
+            Scan activity
           </h2>
-          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">14 hari terakhir</p>
+          <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">Last 14 days</p>
         </div>
         <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-sm font-semibold text-brand-700 dark:bg-brand-500/15 dark:text-brand-300">
           <TrendingUp className="h-4 w-4" />
-          {total} pindai
+          {total} scans
         </span>
       </div>
 
@@ -87,7 +87,7 @@ export function ScanActivityChart({ points }: ScanActivityChartProps) {
         {total === 0 && (
           <div className="absolute inset-0 flex items-center justify-center">
             <p className="rounded-full bg-slate-50 px-3 py-1 text-xs font-medium text-slate-400 dark:bg-slate-800 dark:text-slate-400">
-              Belum ada pemindaian
+              No scans yet
             </p>
           </div>
         )}

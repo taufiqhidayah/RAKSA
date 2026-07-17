@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Informasi Darurat — GelangSiaga",
-  description: "Informasi darurat pemakai GelangSiaga.",
+  title: "Emergency Information — raksa",
+  description: "Emergency information for raksa wearers.",
   robots: { index: false, follow: false },
 };
 

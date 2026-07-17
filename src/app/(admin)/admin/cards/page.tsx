@@ -26,7 +26,7 @@ export default async function AdminCardsPage({ searchParams }: CardsPageProps) {
     <div>
       <PageHeader
         title="Registered Tags"
-        description="Semua tag NFC yang terdaftar. Cari, filter, lihat detail, cabut, atau hapus."
+        description="All registered NFC tags. Search, filter, view details, revoke, or delete."
         breadcrumbs={[{ label: "Admin", href: "/admin" }, { label: "Registered Cards" }]}
       />
       <CardsTable

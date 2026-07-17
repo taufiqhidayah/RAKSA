@@ -77,13 +77,13 @@ export function LandingFooter() {
 
         <Reveal delay={320} className="mt-12 border-t border-slate-200/80 pt-6">
           <p className="max-w-3xl text-xs leading-relaxed text-slate-400">
-            RAKSA-TAG is an emergency identification tool, not a medical device.
+            raksa is an emergency identification tool, not a medical device.
             Information is self-reported by the owner and is not verified by
             medical professionals. The public page only shows the data needed
             for an emergency.
           </p>
           <p className="mt-4 text-xs text-slate-400">
-            © {year} RAKSA-TAG. All rights reserved.
+            © {year} raksa. All rights reserved.
           </p>
         </Reveal>
       </div>

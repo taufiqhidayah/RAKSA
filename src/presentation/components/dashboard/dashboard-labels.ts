@@ -1,29 +1,29 @@
 import { DeviceType, ProfileMode, WristbandStatus } from "@/core/domain/enums";
 
 const STATUS_LABELS: Record<string, string> = {
-  [WristbandStatus.UNCLAIMED]: "Belum diklaim",
-  [WristbandStatus.CLAIMED]: "Setup belum selesai",
-  [WristbandStatus.ACTIVE]: "Aktif",
-  [WristbandStatus.DISABLED]: "Nonaktif",
-  [WristbandStatus.REVOKED]: "Dicabut",
+  [WristbandStatus.UNCLAIMED]: "Unclaimed",
+  [WristbandStatus.CLAIMED]: "Setup incomplete",
+  [WristbandStatus.ACTIVE]: "Active",
+  [WristbandStatus.DISABLED]: "Disabled",
+  [WristbandStatus.REVOKED]: "Revoked",
 };
 
 const PROFILE_MODE_LABELS: Record<ProfileMode, string> = {
-  [ProfileMode.ADULT_EMERGENCY]: "Darurat Medis",
-  [ProfileMode.CHILD_GUARDIAN]: "Wali Anak",
-  [ProfileMode.ELDERLY_DEPENDENT]: "Lansia",
+  [ProfileMode.ADULT_EMERGENCY]: "Medical emergency",
+  [ProfileMode.CHILD_GUARDIAN]: "Child guardian",
+  [ProfileMode.ELDERLY_DEPENDENT]: "Elderly",
 };
 
 const WEARER_ROLE_LABELS: Record<string, string> = {
-  self: "Diri sendiri",
-  child: "Anak",
-  elderly_parent: "Orang tua",
+  self: "Myself",
+  child: "Child",
+  elderly_parent: "Parent",
 };
 
 const DEVICE_TYPE_LABELS: Record<DeviceType, string> = {
-  [DeviceType.BRACELET]: "Gelang",
-  [DeviceType.NECKLACE]: "Kalung",
-  [DeviceType.KEYCHAIN]: "Gantungan Kunci",
+  [DeviceType.BRACELET]: "Bracelet",
+  [DeviceType.NECKLACE]: "Necklace",
+  [DeviceType.KEYCHAIN]: "Keychain",
 };
 
 export function getDeviceTypeLabel(type?: string): string | null {

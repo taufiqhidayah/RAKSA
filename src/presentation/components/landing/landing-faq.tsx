@@ -23,7 +23,7 @@ const FAQS = [
   },
   {
     q: "Is this a medical device?",
-    a: "No. RAKSA-TAG is an emergency identification tool that helps reconnect people with their family. Information is self-reported by the owner and doesn't replace professional diagnosis or medical care.",
+    a: "No. raksa is an emergency identification tool that helps reconnect people with their family. Information is self-reported by the owner and doesn't replace professional diagnosis or medical care.",
   },
 ];
 

@@ -66,7 +66,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 type="button"
                 onClick={() => remove(t.id)}
                 className="rounded-md p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-700"
-                aria-label="Tutup"
+                aria-label="Close"
               >
                 <X className="h-3.5 w-3.5" />
               </button>

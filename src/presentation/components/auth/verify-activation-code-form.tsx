@@ -28,14 +28,14 @@ export function VerifyActivationCodeForm({ onVerified }: VerifyActivationCodeFor
     <form action={formAction} className="auth-form__body">
       <div className="auth-field">
         <label htmlFor="activationCode" className="auth-field__label">
-          Kode Aktivasi
+          Activation Code
         </label>
         <input
           id="activationCode"
           name="activationCode"
           type="text"
           className="auth-field__input auth-field__input--code"
-          placeholder="Contoh: A1B2C3"
+          placeholder="Example: A1B2C3"
           autoComplete="off"
           autoCapitalize="characters"
           spellCheck={false}
@@ -50,7 +50,7 @@ export function VerifyActivationCodeForm({ onVerified }: VerifyActivationCodeFor
       )}
 
       <button type="submit" className="auth-btn auth-btn--primary auth-btn--full" disabled={pending}>
-        {pending ? "Memvalidasi..." : "Lanjutkan"}
+        {pending ? "Validating..." : "Continue"}
       </button>
     </form>
   );

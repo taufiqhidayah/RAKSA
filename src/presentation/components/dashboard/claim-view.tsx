@@ -11,13 +11,13 @@ export function ClaimView() {
           className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
         >
           <ArrowLeft className="h-4 w-4" />
-          Kembali
+          Back
         </Link>
         <h1 className="mt-3 text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-          Tambah Anggota
+          Add member
         </h1>
         <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-          Masukkan Kode Aktivasi dan pilih untuk siapa tag ini.
+          Enter your activation code and choose who this tag is for.
         </p>
       </div>
 

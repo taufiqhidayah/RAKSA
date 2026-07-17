@@ -16,7 +16,7 @@ const inter = Inter({
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Admin — GelangSiaga",
+  title: "Admin — raksa",
   robots: { index: false, follow: false },
 };
 

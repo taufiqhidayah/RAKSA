@@ -10,13 +10,13 @@ import { LinkButton } from "./ui/button";
 
 function formatDateTime(iso: string): string {
   const d = new Date(iso);
-  const date = d.toLocaleDateString("id-ID", {
+  const date = d.toLocaleDateString("en-US", {
     day: "2-digit",
     month: "short",
     year: "numeric",
   });
   const time = d
-    .toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit", hour12: false })
+    .toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })
     .replace(".", ":");
   return `${date} ${time}`;
 }
@@ -25,14 +25,14 @@ function CardHeader() {
   return (
     <div className="flex items-center justify-between gap-4 border-b border-slate-100 px-5 py-4 dark:border-slate-700/60">
       <div>
-        <h2 className="text-base font-semibold text-slate-900 dark:text-white">Registrasi Terbaru</h2>
-        <p className="text-sm text-slate-500 dark:text-slate-400">Tag NFC yang baru saja diprovisi.</p>
+        <h2 className="text-base font-semibold text-slate-900 dark:text-white">Recent registrations</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400">Recently provisioned NFC tags.</p>
       </div>
       <Link
         href="/admin/cards"
         className="group inline-flex shrink-0 items-center gap-1 text-sm font-medium text-brand-600 hover:text-brand-700"
       >
-        Lihat semua
+        View all
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
       </Link>
     </div>
@@ -60,13 +60,13 @@ export function RecentRegistrations({ items }: { items: AdminWristbandRowDto[] }
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600 ring-1 ring-brand-600/10 dark:bg-brand-500/10 dark:text-brand-300">
               <CreditCard className="h-7 w-7" />
             </div>
-            <h3 className="mt-4 text-base font-semibold text-slate-900 dark:text-white">Belum ada tag</h3>
+            <h3 className="mt-4 text-base font-semibold text-slate-900 dark:text-white">No tags yet</h3>
             <p className="mt-1 max-w-sm text-sm text-slate-500 dark:text-slate-400">
-              Belum ada tag NFC yang terdaftar. Mulai dengan mendaftarkan tag pertama.
+              No NFC tags registered yet. Get started by registering your first tag.
             </p>
             <div className="mt-5">
               <LinkButton href="/admin/cards?new=1" pill>
-                Daftarkan Tag
+                Register tag
               </LinkButton>
             </div>
           </div>
@@ -79,8 +79,8 @@ export function RecentRegistrations({ items }: { items: AdminWristbandRowDto[] }
                     <th className="px-5 py-3.5 font-medium">Public ID</th>
                     <th className="px-5 py-3.5 font-medium">Label</th>
                     <th className="px-5 py-3.5 font-medium">Status</th>
-                    <th className="px-5 py-3.5 font-medium">Dibuat</th>
-                    <th className="px-5 py-3.5 text-right font-medium">Aksi</th>
+                    <th className="px-5 py-3.5 font-medium">Created</th>
+                    <th className="px-5 py-3.5 text-right font-medium">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="admin-stagger divide-y divide-slate-50 dark:divide-slate-700/50">
@@ -105,8 +105,8 @@ export function RecentRegistrations({ items }: { items: AdminWristbandRowDto[] }
                             type="button"
                             onClick={(e) => copyId(e, row)}
                             className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-brand-600 dark:hover:bg-slate-700"
-                            aria-label="Salin Public ID"
-                            title="Salin Public ID"
+                            aria-label="Copy Public ID"
+                            title="Copy Public ID"
                           >
                             {copiedId === row.id ? (
                               <Check className="h-4 w-4 text-brand-600" />
@@ -121,8 +121,8 @@ export function RecentRegistrations({ items }: { items: AdminWristbandRowDto[] }
                               setDetailId(row.id);
                             }}
                             className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-brand-600 dark:hover:bg-slate-700"
-                            aria-label="Lihat detail"
-                            title="Detail"
+                            aria-label="View details"
+                            title="Details"
                           >
                             <Eye className="h-4 w-4" />
                           </button>
@@ -136,7 +136,7 @@ export function RecentRegistrations({ items }: { items: AdminWristbandRowDto[] }
 
             <div className="flex items-center justify-center gap-1.5 border-t border-slate-100 px-5 py-3 text-xs text-slate-400 dark:border-slate-700/60">
               <CircleSlash className="h-3.5 w-3.5" />
-              Tidak ada lagi data
+              No more data
             </div>
           </>
         )}

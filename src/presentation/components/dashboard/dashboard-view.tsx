@@ -39,9 +39,9 @@ const METHOD_ICON: Record<string, LucideIcon> = {
 
 const METHOD_LABEL: Record<string, string> = {
   [AccessMethod.NFC]: "NFC",
-  [AccessMethod.QR]: "Kode QR",
-  [AccessMethod.MANUAL_LOOKUP]: "Pencarian manual",
-  [AccessMethod.UNKNOWN]: "Tidak diketahui",
+  [AccessMethod.QR]: "QR code",
+  [AccessMethod.MANUAL_LOOKUP]: "Manual lookup",
+  [AccessMethod.UNKNOWN]: "Unknown",
 };
 
 function displayName(email: string): string {
@@ -50,7 +50,7 @@ function displayName(email: string): string {
 }
 
 function today(): string {
-  return new Intl.DateTimeFormat("id-ID", {
+  return new Intl.DateTimeFormat("en-US", {
     weekday: "long",
     day: "numeric",
     month: "long",
@@ -58,7 +58,7 @@ function today(): string {
 }
 
 function formatWhen(iso: string): string {
-  return new Intl.DateTimeFormat("id-ID", {
+  return new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "short",
     hour: "2-digit",
@@ -73,9 +73,9 @@ function ActivityFeed({ activity }: { activity: ScanActivityDto[] }) {
         <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500">
           <ScanLine className="h-6 w-6" />
         </span>
-        <p className="mt-3 text-sm font-medium text-slate-700 dark:text-slate-200">Belum ada pemindaian</p>
+        <p className="mt-3 text-sm font-medium text-slate-700 dark:text-slate-200">No scans yet</p>
         <p className="mt-1 max-w-xs text-sm text-slate-500 dark:text-slate-400">
-          Riwayat muncul di sini saat seseorang memindai tag keluarga Anda.
+          History appears here when someone scans your family tag.
         </p>
       </div>
     );
@@ -92,7 +92,7 @@ function ActivityFeed({ activity }: { activity: ScanActivityDto[] }) {
             </span>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-slate-900 dark:text-slate-100">
-                {item.wearerLabel} dipindai
+                {item.wearerLabel} scanned
               </p>
               <p className="truncate text-xs text-slate-500 dark:text-slate-400">
                 {METHOD_LABEL[item.accessMethod] ?? item.accessMethod} · {formatWhen(item.scannedAt)}
@@ -101,7 +101,7 @@ function ActivityFeed({ activity }: { activity: ScanActivityDto[] }) {
             {item.locationShared && (
               <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-600/20 dark:bg-emerald-500/15 dark:text-emerald-300 dark:ring-emerald-500/25">
                 <MapPin className="h-3 w-3" />
-                Lokasi
+                Location
               </span>
             )}
           </li>
@@ -129,14 +129,14 @@ export function DashboardView({ userEmail, wristbands, activity, scanTrend }: Da
               {initial}
             </span>
             <div>
-              <p className="text-xs font-medium text-white/70">Selamat datang</p>
+              <p className="text-xs font-medium text-white/70">Welcome</p>
               <p className="text-lg font-bold leading-tight">{displayName(userEmail)}</p>
             </div>
           </Link>
           <Link
             href="/notifications"
             className="relative rounded-2xl bg-white/15 p-2.5 ring-1 ring-white/20 backdrop-blur transition active:scale-95"
-            aria-label="Notifikasi"
+            aria-label="Notifications"
           >
             <Bell className="h-5 w-5" />
           </Link>
@@ -148,15 +148,15 @@ export function DashboardView({ userEmail, wristbands, activity, scanTrend }: Da
           </span>
           <div className="min-w-0 flex-1">
             <p className="text-sm font-semibold">
-              {active} dari {total} tag aktif
+              {active} of {total} tags active
             </p>
-            <p className="text-xs text-white/70">{scans14d} pemindaian dalam 14 hari terakhir</p>
+            <p className="text-xs text-white/70">{scans14d} scans in the last 14 days</p>
           </div>
           <Link
             href="/claim"
             className="shrink-0 rounded-xl bg-white px-3.5 py-2 text-xs font-bold text-brand-700 shadow-sm transition active:scale-95"
           >
-            Tambah
+            Add
           </Link>
         </div>
       </section>
@@ -165,9 +165,9 @@ export function DashboardView({ userEmail, wristbands, activity, scanTrend }: Da
       <div className="hidden items-center justify-between lg:flex">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-            Halo, {displayName(userEmail)}
+            Hi, {displayName(userEmail)}
           </h1>
-          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Ringkasan tag darurat keluarga Anda.</p>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Your family emergency tags at a glance.</p>
         </div>
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
@@ -179,7 +179,7 @@ export function DashboardView({ userEmail, wristbands, activity, scanTrend }: Da
             className="inline-flex items-center gap-1.5 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_-10px_rgba(124,58,237,0.75)] transition-all hover:-translate-y-0.5 hover:bg-brand-500"
           >
             <Plus className="h-4 w-4" />
-            Tambah Anggota
+            Add member
           </Link>
         </div>
       </div>
@@ -199,15 +199,15 @@ export function DashboardView({ userEmail, wristbands, activity, scanTrend }: Da
         <section className="space-y-4 lg:col-span-2">
           <div className="flex items-end justify-between">
             <div>
-              <h2 className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">Tag Keluarga</h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400">Semua tag darurat dalam satu akun.</p>
+              <h2 className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">Family tags</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400">All emergency tags in one account.</p>
             </div>
             {hasWristbands && (
               <Link
                 href="/claim"
                 className="hidden text-sm font-semibold text-brand-600 hover:text-brand-700 dark:text-brand-400 dark:hover:text-brand-300 sm:inline"
               >
-                + Tambah
+                + Add
               </Link>
             )}
           </div>
@@ -217,7 +217,7 @@ export function DashboardView({ userEmail, wristbands, activity, scanTrend }: Da
         <section className="flex flex-col space-y-4 lg:col-span-1">
           <div className="flex items-center gap-2">
             <Activity className="h-5 w-5 text-brand-600 dark:text-brand-400" />
-            <h2 className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">Aktivitas Terbaru</h2>
+            <h2 className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">Recent activity</h2>
           </div>
           <ActivityFeed activity={activity} />
         </section>
