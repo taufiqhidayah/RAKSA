@@ -22,6 +22,20 @@ export class SupabaseEmergencyProfileRepository
     return data ? emergencyProfileToDomain(data) : null;
   }
 
+  async findByWristbandIds(
+    wristbandIds: string[],
+  ): Promise<EmergencyProfile[]> {
+    if (wristbandIds.length === 0) return [];
+
+    const { data, error } = await this.client
+      .from("emergency_profiles")
+      .select("*")
+      .in("wristband_id", wristbandIds);
+
+    if (error) throw error;
+    return (data ?? []).map(emergencyProfileToDomain);
+  }
+
   async save(profile: EmergencyProfile): Promise<void> {
     const { error } = await this.client
       .from("emergency_profiles")

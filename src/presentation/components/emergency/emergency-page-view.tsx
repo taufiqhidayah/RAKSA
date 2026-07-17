@@ -169,9 +169,18 @@ export function EmergencyPageView({ data }: EmergencyPageViewProps) {
 
             <div
               className="grid h-[220px] w-40 shrink-0 place-items-center overflow-hidden rounded-[1.75rem] bg-[#D1D5DB] text-[#9CA3AF] max-[380px]:h-[190px] max-[380px]:w-[132px]"
-              aria-hidden="true"
+              aria-hidden={data.photoUrl ? undefined : true}
             >
-              <UserRound size={88} strokeWidth={1.4} />
+              {data.photoUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={data.photoUrl}
+                  alt={`Foto ${data.preferredName}`}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <UserRound size={88} strokeWidth={1.4} />
+              )}
             </div>
           </div>
 

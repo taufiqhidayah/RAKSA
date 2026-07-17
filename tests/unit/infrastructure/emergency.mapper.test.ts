@@ -28,6 +28,7 @@ describe("emergency Supabase mappers", () => {
       disorientation_notes: null,
       cognitive_condition_flag: false,
       language_hint: "Indonesia",
+      photo_url: null,
       is_public_enabled: true,
       last_confirmed_at: timestamp,
       created_at: timestamp,

@@ -116,7 +116,7 @@ export function WristbandCard({ tag, index = 0 }: WristbandCardProps) {
       <div className="mt-5 flex flex-wrap gap-2 pt-1">
         {needsSetup ? (
           <Link
-            href="/setup"
+            href={`/setup?wristband=${tag.id}`}
             className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_8px_20px_-8px_rgba(124,58,237,0.7)] transition-all hover:-translate-y-0.5 hover:bg-brand-500"
           >
             Lanjutkan Setup
@@ -124,10 +124,10 @@ export function WristbandCard({ tag, index = 0 }: WristbandCardProps) {
           </Link>
         ) : (
           <Link
-            href={`/wristbands/${tag.id}`}
+            href={`/setup?wristband=${tag.id}`}
             className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-all hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-slate-600 dark:hover:bg-slate-800"
           >
-            Detail
+            Kelola
             <ChevronRight className="h-4 w-4 text-slate-400 dark:text-slate-500" />
           </Link>
         )}

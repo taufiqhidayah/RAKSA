@@ -14,6 +14,7 @@ export interface EmergencyProfileRow {
   disorientation_notes: string | null;
   cognitive_condition_flag: boolean;
   language_hint: string | null;
+  photo_url: string | null;
   is_public_enabled: boolean;
   last_confirmed_at: string | null;
   created_at: string;
@@ -35,6 +36,7 @@ export function emergencyProfileToDomain(row: EmergencyProfileRow): EmergencyPro
     disorientationNotes: row.disorientation_notes ?? undefined,
     cognitiveConditionFlag: row.cognitive_condition_flag,
     languageHint: row.language_hint ?? undefined,
+    photoUrl: row.photo_url ?? undefined,
     isPublicEnabled: row.is_public_enabled,
     lastConfirmedAt: row.last_confirmed_at
       ? new Date(row.last_confirmed_at)
@@ -61,6 +63,7 @@ export function emergencyProfileToRow(
     disorientation_notes: profile.disorientationNotes ?? null,
     cognitive_condition_flag: profile.cognitiveConditionFlag,
     language_hint: profile.languageHint ?? null,
+    photo_url: profile.photoUrl ?? null,
     is_public_enabled: profile.isPublicEnabled,
     last_confirmed_at: profile.lastConfirmedAt?.toISOString() ?? null,
     created_at: profile.createdAt.toISOString(),
